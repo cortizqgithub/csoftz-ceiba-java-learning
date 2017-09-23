@@ -1,0 +1,10 @@
+= Database setup
+
+The RDBMS used in this project is MySQL V5.7 via docker.
+
+https://hub.docker.com/r/mysql/mysql-server/
+
+[source,terminal]
+----
+$ docker pull mysql/mysql-server
+----
