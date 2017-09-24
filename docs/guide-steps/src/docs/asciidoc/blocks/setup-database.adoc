@@ -8,3 +8,14 @@ https://hub.docker.com/r/mysql/mysql-server/
 ----
 $ docker pull mysql/mysql-server
 ----
+
+read these:
+https://severalnines.com/blog/mysql-docker-containers-understanding-basics
+https://severalnines.com/blog/mysql-docker-building-container-image
+https://severalnines.com/blog/mysql-docker-single-host-networking-mysql-containers
+https://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking
+https://severalnines.com/blog/mysql-docker-multi-host-networking-mysql-containers-part-2-calico
+
+Video
+https://www.youtube.com/watch?v=-CayzT_x-aY
+https://www.youtube.com/watch?v=rTOfYLiz2Qk
