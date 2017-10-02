@@ -1,0 +1,14 @@
+sonar.projectKey = csoftz-ceiba-java-learning-parking-web
+sonar.projectName = Ceiba Java Learning Parking Web
+sonar.projectVersion = 1.0
+sonar.projectBaseDir = ../checkoutcode/app-code/server/parking-web
+sonar.sources = ../checkoutcode/app-code/server/parking-web/src/main/java
+sonar.scm.disabled = false
+sonar.tests = ../checkoutcode/app-code/server/parking-web/src/test/java
+sonar.jacoco.reportMissing.force.zero = false
+sonar.jacoco.reportPath = ../checkoutcode/jacoco/parking-web/jacocoTest.exec
+sonar.jacoco.itReportPath = ../checkoutcode/jacoco/parking-web/jacocoTest.exec
+sonar.junit.reportsPath = ../checkoutcode/jacoco/parking-web/test-results
+sonar.java.binaries = ../checkoutcode/app-code/server/parking-web/build/classes
+sonar.language = java
+sonar.sourceEncoding = UTF-8
