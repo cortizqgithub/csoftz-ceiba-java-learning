@@ -13,6 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
 
 group = 'com.csoftz.ceiba.java.learn'
 version = '0.0.1-SNAPSHOT'
@@ -22,6 +23,13 @@ repositories {
 	mavenCentral()
 }
 
+test {
+    jacoco {
+        append = false
+        destinationFile = file('jacoco/jacocoTest.exec')
+    }
+    reports.junitXml.destination = file('jacoco/test-results')
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -31,3 +39,5 @@ dependencies {
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+jacocoTestReport.dependsOn(test)
