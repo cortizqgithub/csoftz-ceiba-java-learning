@@ -1,0 +1,33 @@
+= Problem 
+The following is the text for the problem that you are required to solve.
+
+== Statement
+Describes the behaviour of a parking attendant to control a parking-lot.
+
+The System Business Rules are as follows:
+
+* The parking lot receives cars and motorcycles.
+* The parking lot can only have 20 cars and 10 motorcycles simultaneously.
+* The plates that start with the letter "A" can only enter the parking lot on Mondays and Sundays,
+otherwise it should show a message that it cannot enter because it is not in a business day.
+* When a car/bike leaves the parking-lot, it is charged by hours if it stayed less than 9 hours in the parking-lot, otherwise
+it charges by days.
+
+*Vehicle Charging Example:*
+
+. Car Hour value is $COP 1000
+. Motorcycle Hour value is $COP 500
+. Car Day value is $COP 8000
+. Motorcycle Day value is $COP 6000
+
+*NOTE:* Motorcycles with a cylinder capacity greater than 500CC pay $COP 2000 more to the total value. 
+If the car stayed a day and 3 hours, for example, it must be charged $COP 11000.
+
+== Non functional Rules
+* Application must be built for the Web.
+* Graphical User Interface must adapt for smartphones.
+* REST Services must accept at least 100 concurrent requests per minute with a response time each not greater than 1.5 secs.
+* The whole solution must use automated tests in order to validate each software layer. For example, unit tests, integration tests,
+loading tests and functional tests.
+* The solution must use Continuous Integration (CI) via Jenkins.
+* The production serer is Ubuntu 12 with 2Gb RAM and 4 CPU Cores.

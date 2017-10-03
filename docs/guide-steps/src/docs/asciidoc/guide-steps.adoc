@@ -23,4 +23,14 @@ include::blocks/preface.adoc[]
 
 include::blocks/introduction.adoc[]
 
+include::blocks/problem.adoc[]
+
+include::blocks/architecture.adoc[]
+
+include::blocks/prerequisites.adoc[]
+
+include::blocks/compilation.adoc[]
+
 include::blocks/setup-database.adoc[]
+
+include::blocks/tips-and-tricks.adoc[]

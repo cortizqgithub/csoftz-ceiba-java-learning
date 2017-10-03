@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+group = 'com.csoftz.ceiba.java.learn'
+version = '1.0.0-RELEASE'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': project.name,
+                   'Implementation-Version': version,
+                   'Main-Class':'com.ceiba.main.MainClass'
+    }
+}
+
+dependencies {
+    compile('com.csoftz.ceiba.java.learn:parking-domain:1.0.0-RELEASE')
+}
+
+

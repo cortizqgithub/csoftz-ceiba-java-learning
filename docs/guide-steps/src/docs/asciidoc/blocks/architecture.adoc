@@ -1,0 +1,6 @@
+= Technological Stack
+This solution is going to be built using Spring Boot 1.5.7 as a web and REST framework for the backend, using Java 8 as the JDK.
+For the database, it will use the MySQL V5.7 server.
+For the GUI there are two choices: One is a web html page via Thymeleaf and Spring with Bootstrap 4.0.
+
+== Initial Architecture

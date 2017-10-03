@@ -1,0 +1,3 @@
+= Compilation
+All the code for the server side can be compiled using the script
+build-artifacts.bat (Windows).
