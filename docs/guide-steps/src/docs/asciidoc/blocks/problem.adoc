@@ -10,7 +10,7 @@ The System Business Rules are as follows:
 * The parking lot can only have 20 cars and 10 motorcycles simultaneously.
 * The plates that start with the letter "A" can only enter the parking lot on Mondays and Sundays,
 otherwise it should show a message that it cannot enter because it is not in a business day.
-* When a car/bike leaves the parking-lot, it is charged by hours if it stayed less than 9 hours in the parking-lot, otherwise
+* When a car/motorcycle leaves the parking-lot, it is charged by hours if it stayed less than 9 hours in the parking-lot, otherwise
 it charges by days.
 
 *Vehicle Charging Example:*

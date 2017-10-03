@@ -18,10 +18,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Parking Web Application Tests  
+ * Parking Web Application Tests
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Sep.22/2017
+ * @version 1.1, Oct.03/2017
  * @since 1.8 (JDK), Sep.22/2017
  */
 @SpringBootApplication
