@@ -23,3 +23,18 @@ http://www.concretepage.com/build-tools/gradle/gradle-include-dependency-on-anot
 
 NOTE: The Gradle Include Dependency on another Project and Execution Order has a ZIP for source code
 for you to learn and use.
+
+== MapStruct
+Use of Mapstruct is pending due to time constraints.
+
+NOTE: To be added in the future. For the time being the mappers is in the package mapper and 
+they are written manually, for now.
+
+Using MapStruct with Gradle
+http://mapstruct.org/news/2013-07-08-using-mapstruct-with-gradle/
+
+MapStruct Reference Guide
+http://mapstruct.org/documentation/reference-guide/
+
+Mapstruct Examples
+https://github.com/mapstruct/mapstruct-examples

@@ -1,59 +1,38 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   PARKINGLOTLOGENTITY.JAVA                                    */
-/* Description:   Domain definition to manipulate Parking-lot Log objects     */
-/*                (Entity).                                                   */
+/* Source File:   PARKINGLOTLOG.JAVA                                          */
+/* Description:   Domain definition to manipulate Parking-lot Log objects.    */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
-/* Date:          Oct.04/2017                                                 */
+/* Date:          Oct.03/2017                                                 */
 /* Last Modified: Oct.04/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------
  History
- Oct.04/2017 COQ  File created.
+ Oct.03/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
 
-package com.csoftz.ceiba.java.learn.parking.service.entities;
+package com.csoftz.ceiba.java.learn.parking.domain;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
- * Domain definition to manipulate Parking-lot Log objects (Entity). <br>
+ * Domain definition to manipulate Parking-lot Log objects. <br>
  * <br>
  * Its purpose is to hold information about all of the activity in the
  * Parking-lot.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
  * @version 1.1, Oct.04/2017
- * @since 1.8 (JDK), Oct.04/2017
+ * @since 1.8 (JDK), Oct.03/2017
  */
-
-@Entity
-@Table(name = "parking_lot_log")
-public class ParkinglotLogEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+public class ParkinglotLog {
 	private Long id;
-
-	@Column(nullable = false)
 	private String plate;
-
-	@Column(name = "vehicle_type", nullable = false)
 	private int vehicleType;
-
-	@Column(name = "admission_date", nullable = false)
 	private LocalDateTime admissionDate;
-
-	@Column(name = "departure_date", nullable = true)
 	private LocalDateTime departureDate;
 
 	/**
@@ -82,7 +61,8 @@ public class ParkinglotLogEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ParkinglotLogEntity other = (ParkinglotLogEntity) obj;
+
+		ParkinglotLog other = (ParkinglotLog) obj;
 		return new EqualsBuilder().appendSuper(super.equals(obj)).append(id, other.id).append(plate, other.plate)
 				.append(vehicleType, other.vehicleType).append(admissionDate, other.admissionDate)
 				.append(departureDate, other.departureDate).isEquals();
@@ -163,15 +143,13 @@ public class ParkinglotLogEntity {
 		this.departureDate = departureDate;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ParkinglotLogEntity [id=" + id + ", plate=" + plate + ", vehicleType=" + vehicleType
-				+ ", admissionDate=" + admissionDate + ", departureDate=" + departureDate + "]";
+		return "ParkinglotLog [id=" + id + ", plate=" + plate + ", vehicleType=" + vehicleType + ", admissionDate="
+				+ admissionDate + ", departureDate=" + departureDate + "]";
 	}
 
 }
