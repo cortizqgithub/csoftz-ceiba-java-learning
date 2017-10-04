@@ -1,32 +1,50 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   VEHICLE.JAVA                                                */
-/* Description:   Domain definition to manipulate Vehicle objects.            */
+/* Source File:   VEHICLEENTITY.JAVA                                          */
+/* Description:   Domain definition to manipulate Vehicle objects (Entity).   */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
-/* Date:          Oct.03/2017                                                 */
+/* Date:          Oct.04/2017                                                 */
 /* Last Modified: Oct.04/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------
  History
- Oct.03/2017 COQ  File created.
+ Oct.04/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
 
-package com.csoftz.ceiba.java.learn;
+package com.csoftz.ceiba.java.learn.parking.service.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
- * Domain definition to manipulate Vehicle objects.
+ * Domain definition to manipulate Vehicle objects (Entity).
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
  * @version 1.1, Oct.04/2017
- * @since 1.8 (JDK), Oct.03/2017
+ * @since 1.8 (JDK), Oct.04/2017
  */
-public class Vehicle {
+
+@Entity
+@Table(name = "vehicle")
+public class VehicleEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@Column(nullable = false, unique = true)
 	private String plate;
+
+	@Column(nullable = false)
 	private int type;
+
+	@Column(nullable = false)
 	private int cylinder;
 
 	/**
@@ -56,7 +74,7 @@ public class Vehicle {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vehicle other = (Vehicle) obj;
+		VehicleEntity other = (VehicleEntity) obj;
 		return new EqualsBuilder().appendSuper(super.equals(obj)).append(id, other.id).append(plate, other.plate)
 				.append(type, other.type).append(cylinder, other.cylinder).isEquals();
 	}
@@ -126,7 +144,7 @@ public class Vehicle {
 	 */
 	@Override
 	public String toString() {
-		return "Vehicle [id=" + id + ", plate=" + plate + ", type=" + type + ", cylinder=" + cylinder + "]";
+		return "VehicleEntity [id=" + id + ", plate=" + plate + ", type=" + type + ", cylinder=" + cylinder + "]";
 	}
 
 }

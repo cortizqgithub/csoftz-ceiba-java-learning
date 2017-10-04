@@ -1,37 +1,48 @@
 /*----------------------------------------------------------------------------*/
 /* Source File:   PARKINGLOTCELLINFO.JAVA                                     */
-/* Description:   Domain definition to manipulate Parking-lot Cell objects.   */
+/* Description:   Domain definition to manipulate Parking-lot Cell objects    */
+/*                (Entity).                                                   */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
-/* Date:          Oct.03/2017                                                 */
+/* Date:          Oct.04/2017                                                 */
 /* Last Modified: Oct.04/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------
  History
- Oct.03/2017 COQ  File created.
+ Oct.04/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
 
-package com.csoftz.ceiba.java.learn;
+package com.csoftz.ceiba.java.learn.parking.service.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
- * Domain definition to manipulate Parking-lot Cell objects. <br>
+ * Domain definition to manipulate Parking-lot Cell objects (Entity). <br>
  * <br>
  * The purpose is to define a cell being used by a Vehicle to control if used or
  * not.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
  * @version 1.1, Oct.04/2017
- * @since 1.8 (JDK), Oct.03/2017
+ * @since 1.8 (JDK), Oct.04/2017
  */
-public class ParkinglotCellInfo {
+
+@Entity
+@Table(name = "parking_lot_cell")
+public class ParkinglotCellInfoEntity {
+	@Id
 	private String plate;
+
+	@Column(name = "vehicle_type")
 	private int vehicleType;
 
 	/**
-	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -44,23 +55,56 @@ public class ParkinglotCellInfo {
 	}
 
 	/**
-	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof ParkinglotCellInfo)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
-		ParkinglotCellInfo other = (ParkinglotCellInfo) obj;
+		ParkinglotCellInfoEntity other = (ParkinglotCellInfoEntity) obj;
 		return new EqualsBuilder().appendSuper(super.equals(obj)).append(plate, other.plate)
 				.append(vehicleType, other.vehicleType).isEquals();
 	}
 
+	/**
+	 * @return the plate
+	 */
+	public String getPlate() {
+		return plate;
+	}
+
+	/**
+	 * @param plate
+	 *            the plate to set
+	 */
+	public void setPlate(String plate) {
+		this.plate = plate;
+	}
+
+	/**
+	 * @return the vehicleType
+	 */
+	public int getVehicleType() {
+		return vehicleType;
+	}
+
+	/**
+	 * @param vehicleType
+	 *            the vehicleType to set
+	 */
+	public void setVehicleType(int vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ParkinglotCellInfoEntity [plate=" + plate + ", vehicleType=" + vehicleType + "]";
+	}
 }
