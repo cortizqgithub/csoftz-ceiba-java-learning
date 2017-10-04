@@ -4,11 +4,11 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: none      
     show-sql: true
 
   datasource:
-    url: jdbc:mysql://localhost:6603/parking_lot
+    url: jdbc:mysql://localhost:3306/parking_lot
     username: root
     password: mypassword
     
