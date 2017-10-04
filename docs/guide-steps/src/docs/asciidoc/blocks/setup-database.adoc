@@ -9,8 +9,18 @@ https://hub.docker.com/r/mysql/mysql-server/
 $ docker pull mysql/mysql-server
 ----
 
-read these:
+[source,terminal]
+----
+$ docker run --detach --name=test-mysql --env="MYSQL_ROOT_PASSWORD=mypassword" --publish 6603:3306 mysql
+----
+
+Read the following blog entries to use MySQL in Docker container:
+
+MySQL Docker Containers: Understanding the basics
 https://severalnines.com/blog/mysql-docker-containers-understanding-basics
+
+
+
 https://severalnines.com/blog/mysql-docker-building-container-image
 https://severalnines.com/blog/mysql-docker-single-host-networking-mysql-containers
 https://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking

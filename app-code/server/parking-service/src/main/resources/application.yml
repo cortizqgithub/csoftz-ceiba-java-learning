@@ -1,0 +1,17 @@
+server:
+  port: 7070
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  datasource:
+    url: jdbc:mysql://localhost:6603/parking_lot
+    username: root
+    password: mypassword
+    
+logging:
+  level:
+    org.hibernate: debug
