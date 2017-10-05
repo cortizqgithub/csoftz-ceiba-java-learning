@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.04/2017                                                 */
+/* Last Modified: Oct.05/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,8 +27,8 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotConfigEnti
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.04/2017
- * @since 1.8 (JDK), Oct.03/2017
+ * @version 1.1, Oct.05/2017
+ * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
 public class ParkinglotConfigMapper {
@@ -43,13 +43,8 @@ public class ParkinglotConfigMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotConfig parkinglotConfig = new ParkinglotConfig();
-
-			// Fill data
-			parkinglotConfig.setId(info.getId());
-			parkinglotConfig.setName(info.getName());
-			parkinglotConfig.setValue(info.getValue());
-			parkinglotConfig.setDescription(info.getDescription());
+			ParkinglotConfig parkinglotConfig = new ParkinglotConfig(info.getId(), info.getName(), info.getValue(),
+					info.getDescription());
 			return parkinglotConfig;
 		}
 	}
@@ -65,13 +60,8 @@ public class ParkinglotConfigMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotConfigEntity parkinglotConfigEntity = new ParkinglotConfigEntity();
-
-			// Fill data
-			parkinglotConfigEntity.setId(info.getId());
-			parkinglotConfigEntity.setName(info.getName());
-			parkinglotConfigEntity.setValue(info.getValue());
-			parkinglotConfigEntity.setDescription(info.getDescription());
+			ParkinglotConfigEntity parkinglotConfigEntity = new ParkinglotConfigEntity(info.getId(), info.getName(),
+					info.getValue(), info.getDescription());
 			return parkinglotConfigEntity;
 		}
 	}

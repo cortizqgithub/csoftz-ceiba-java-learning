@@ -3,7 +3,7 @@
 /* Description:   Domain definition to manipulate Parking-lot Cell objects.   */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.04/2017                                                 */
+/* Last Modified: Oct.05/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -23,12 +23,26 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * not.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.04/2017
+ * @version 1.1, Oct.05/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class ParkinglotCellInfo {
 	private String plate;
 	private int vehicleType;
+
+	/**
+	 * Constructor with fields.
+	 * 
+	 * @param plate
+	 *            Description of the Vehicle.
+	 * @param vehicleType
+	 *            Holds 1:Car, 2:Motorcycle.
+	 */
+	public ParkinglotCellInfo(String plate, int vehicleType) {
+		super();
+		this.plate = plate;
+		this.vehicleType = vehicleType;
+	}
 
 	/**
 	 * @see java.lang.Object#hashCode()

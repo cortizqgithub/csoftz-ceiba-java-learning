@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.04/2017                                                 */
+/* Last Modified: Oct.05/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,8 +27,8 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotCellInfoEn
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.04/2017
- * @since 1.8 (JDK), Oct.03/2017
+ * @version 1.1, Oct.05/2017
+ * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
 public class ParkinglotCellInfoMapper {
@@ -44,11 +44,7 @@ public class ParkinglotCellInfoMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotCellInfo parkinglotCellInfo = new ParkinglotCellInfo();
-
-			// Fill data
-			parkinglotCellInfo.setPlate(info.getPlate());
-			parkinglotCellInfo.setVehicleType(info.getVehicleType());
+			ParkinglotCellInfo parkinglotCellInfo = new ParkinglotCellInfo(info.getPlate(), info.getVehicleType());
 			return parkinglotCellInfo;
 		}
 	}
@@ -64,11 +60,8 @@ public class ParkinglotCellInfoMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotCellInfoEntity parkinglotCellInfoEntity = new ParkinglotCellInfoEntity();
-
-			// Fill data
-			parkinglotCellInfoEntity.setPlate(info.getPlate());
-			parkinglotCellInfoEntity.setVehicleType(info.getVehicleType());
+			ParkinglotCellInfoEntity parkinglotCellInfoEntity = new ParkinglotCellInfoEntity(info.getPlate(),
+					info.getVehicleType());
 			return parkinglotCellInfoEntity;
 		}
 	}

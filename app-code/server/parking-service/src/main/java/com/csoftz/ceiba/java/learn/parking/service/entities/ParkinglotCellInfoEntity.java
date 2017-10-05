@@ -43,6 +43,20 @@ public class ParkinglotCellInfoEntity {
 	private int vehicleType;
 
 	/**
+	 * Constructor with fields.
+	 * 
+	 * @param plate
+	 *            Description of the Vehicle
+	 * @param vehicleType
+	 *            Holds 1:Car, 2:Motorcycle.
+	 */
+	public ParkinglotCellInfoEntity(String plate, int vehicleType) {
+		super();
+		this.plate = plate;
+		this.vehicleType = vehicleType;
+	}
+
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

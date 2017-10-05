@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.04/2017                                                 */
+/* Last Modified: Oct.05/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,8 +27,8 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.VehicleEntity;
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.04/2017
- * @since 1.8 (JDK), Oct.03/2017
+ * @version 1.1, Oct.05/2017
+ * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
 public class VehicleMapper {
@@ -44,13 +44,7 @@ public class VehicleMapper {
 		if (info == null) {
 			return null;
 		} else {
-			Vehicle vehicle = new Vehicle();
-
-			// Fill data
-			vehicle.setId(info.getId());
-			vehicle.setPlate(info.getPlate());
-			vehicle.setType(info.getType());
-			vehicle.setCylinder(info.getCylinder());
+			Vehicle vehicle = new Vehicle(info.getId(), info.getPlate(), info.getType(), info.getCylinder());
 			return vehicle;
 		}
 	}
@@ -66,13 +60,8 @@ public class VehicleMapper {
 		if (info == null) {
 			return null;
 		} else {
-			VehicleEntity vehicleEntity = new VehicleEntity();
-
-			// Fill data
-			vehicleEntity.setId(info.getId());
-			vehicleEntity.setPlate(info.getPlate());
-			vehicleEntity.setType(info.getType());
-			vehicleEntity.setCylinder(info.getCylinder());
+			VehicleEntity vehicleEntity = new VehicleEntity(info.getId(), info.getPlate(), info.getType(),
+					info.getCylinder());
 			return vehicleEntity;
 		}
 	}

@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.04/2017                                                 */
+/* Last Modified: Oct.05/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,8 +27,8 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotLogEntity;
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.04/2017
- * @since 1.8 (JDK), Oct.03/2017
+ * @version 1.1, Oct.05/2017
+ * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
 public class ParkinglotLogMapper {
@@ -44,14 +44,8 @@ public class ParkinglotLogMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotLog parkinglotLog = new ParkinglotLog();
-
-			// Fill data
-			parkinglotLog.setId(info.getId());
-			parkinglotLog.setPlate(info.getPlate());
-			parkinglotLog.setVehicleType(info.getVehicleType());
-			parkinglotLog.setAdmissionDate(info.getAdmissionDate());
-			parkinglotLog.setDepartureDate(info.getDepartureDate());
+			ParkinglotLog parkinglotLog = new ParkinglotLog(info.getId(), info.getPlate(), info.getVehicleType(),
+					info.getAdmissionDate(), info.getDepartureDate());
 			return parkinglotLog;
 		}
 	}
@@ -67,14 +61,8 @@ public class ParkinglotLogMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotLogEntity parkinglotLogEntity = new ParkinglotLogEntity();
-
-			// Fill data
-			parkinglotLogEntity.setId(info.getId());
-			parkinglotLogEntity.setPlate(info.getPlate());
-			parkinglotLogEntity.setVehicleType(info.getVehicleType());
-			parkinglotLogEntity.setAdmissionDate(info.getAdmissionDate());
-			parkinglotLogEntity.setDepartureDate(info.getDepartureDate());
+			ParkinglotLogEntity parkinglotLogEntity = new ParkinglotLogEntity(info.getId(), info.getPlate(),
+					info.getVehicleType(), info.getAdmissionDate(), info.getDepartureDate());
 			return parkinglotLogEntity;
 		}
 	}

@@ -52,6 +52,26 @@ public class ParkinglotConfigEntity {
 	private String description;
 
 	/**
+	 * Constructor with fields.
+	 * 
+	 * @param id
+	 *            Identifier for the object.
+	 * @param name
+	 *            Describes the configuration variable.
+	 * @param value
+	 *            Content of variable
+	 * @param description
+	 *            What it is used for.
+	 */
+	public ParkinglotConfigEntity(Long id, String name, String value, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.value = value;
+		this.description = description;
+	}
+
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

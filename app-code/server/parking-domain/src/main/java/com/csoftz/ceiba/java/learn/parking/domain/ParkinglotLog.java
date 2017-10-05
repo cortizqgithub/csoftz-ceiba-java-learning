@@ -3,7 +3,7 @@
 /* Description:   Domain definition to manipulate Parking-lot Log objects.    */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.04/2017                                                 */
+/* Last Modified: Oct.05/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -25,7 +25,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * Parking-lot.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.04/2017
+ * @version 1.1, Oct.05/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class ParkinglotLog {
@@ -34,6 +34,30 @@ public class ParkinglotLog {
 	private int vehicleType;
 	private LocalDateTime admissionDate;
 	private LocalDateTime departureDate;
+
+	/**
+	 * Constructor with parameters.
+	 * 
+	 * @param id
+	 *            Identification of object
+	 * @param plate
+	 *            Description of the Vehicle
+	 * @param vehicleType
+	 *            Holds 1:Car, 2:Motorcycle.
+	 * @param admissionDate
+	 *            Date/Time when vehicle entered the Parkinglot.
+	 * @param departureDate
+	 *            Date/Time when vehicle left the Parkinglot.
+	 */
+	public ParkinglotLog(Long id, String plate, int vehicleType, LocalDateTime admissionDate,
+			LocalDateTime departureDate) {
+		super();
+		this.id = id;
+		this.plate = plate;
+		this.vehicleType = vehicleType;
+		this.admissionDate = admissionDate;
+		this.departureDate = departureDate;
+	}
 
 	/**
 	 * @see java.lang.Object#hashCode()

@@ -23,13 +23,16 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Parking Service (REST API) Application Tests
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.03/2017
+ * @version 1.1, Oct.04/2017
  * @since 1.8 (JDK), Sep.22/2017
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ParkingServiceApplicationTests {
 
+	/**
+	 * Loads default Spring Boot Context.
+	 */
 	@Test
 	public void contextLoads() {
 	}
