@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * Domain definition to manipulate configuration objects. <br>
  * <br>
  * The purpose is to hold Parking lot configuration variables in a centralized
- * may it be a database, a config or any other persistence way.
+ * may it be a database, a configuration file or any other persistence way.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
  * @version 1.1, Oct.05/2017

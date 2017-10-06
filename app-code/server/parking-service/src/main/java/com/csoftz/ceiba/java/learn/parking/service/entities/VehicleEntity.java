@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /* Source File:   VEHICLEENTITY.JAVA                                          */
 /* Description:   Domain definition to manipulate Vehicle objects (Entity).   */
-/* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
+/* Author:        Carlos Adolfo Ortiz Quirï¿½s (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
 /* Last Modified: Oct.05/2017                                                 */
 /* Version:       1.1                                                         */
@@ -26,7 +26,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 /**
  * Domain definition to manipulate Vehicle objects (Entity).
  *
- * @author Carlos Adolfo Ortiz Quirós (COQ)
+ * @author Carlos Adolfo Ortiz Quirï¿½s (COQ)
  * @version 1.1, Oct.05/2017
  * @since 1.8 (JDK), Oct.04/2017
  */
@@ -51,9 +51,9 @@ public class VehicleEntity {
 	 * Constructor with fields
 	 * 
 	 * @param id
-	 *            Identifier to the object
+	 *            Identifier to the object.
 	 * @param plate
-	 *            Description of the Vehicle
+	 *            Description of the Vehicle.
 	 * @param type
 	 *            Holds 1:Car, 2:Motorcycle.
 	 * @param cylinder

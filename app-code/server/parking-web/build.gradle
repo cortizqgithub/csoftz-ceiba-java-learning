@@ -41,6 +41,7 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile('com.csoftz.ceiba.java.learn:parking-domain:1.0.0-RELEASE')
 	compile('com.csoftz.ceiba.java.learn:parking-commons:1.0.0-RELEASE')
 }
 

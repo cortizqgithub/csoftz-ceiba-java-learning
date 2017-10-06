@@ -39,7 +39,7 @@ public class ParkinglotConfigMapper {
 	 *            Source data
 	 * @return A ParkinglotConfig object. NULL if source is NULL.
 	 */
-	public ParkinglotConfig ParkinglotConfigEntityToParkinglotConfig(ParkinglotConfigEntity info) {
+	public ParkinglotConfig parkinglotConfigEntityToParkinglotConfig(ParkinglotConfigEntity info) {
 		if (info == null) {
 			return null;
 		} else {
@@ -56,7 +56,7 @@ public class ParkinglotConfigMapper {
 	 *            Source data
 	 * @return A ParkinglotConfigEntity object. NULL if source is NULL.
 	 */
-	public ParkinglotConfigEntity ParkinglotConfigToParkinglotConfigEntity(ParkinglotConfig info) {
+	public ParkinglotConfigEntity parkinglotConfigToParkinglotConfigEntity(ParkinglotConfig info) {
 		if (info == null) {
 			return null;
 		} else {
@@ -73,9 +73,9 @@ public class ParkinglotConfigMapper {
 	 *            Source data.
 	 * @return List of ParkinglotConfigEntities.
 	 */
-	public List<ParkinglotConfigEntity> ParkinglotConfigsToParkinglotConfigEntities(
+	public List<ParkinglotConfigEntity> parkinglotConfigsToParkinglotConfigEntities(
 			List<ParkinglotConfig> ParkinglotConfigs) {
-		return ParkinglotConfigs.stream().filter(Objects::nonNull).map(this::ParkinglotConfigToParkinglotConfigEntity)
+		return ParkinglotConfigs.stream().filter(Objects::nonNull).map(this::parkinglotConfigToParkinglotConfigEntity)
 				.collect(Collectors.toList());
 	}
 
@@ -86,10 +86,10 @@ public class ParkinglotConfigMapper {
 	 *            Source Data
 	 * @return List of ParkinglotConfigs.
 	 */
-	public List<ParkinglotConfig> ParkinglotConfigEntitiesToParkinglotConfigs(
+	public List<ParkinglotConfig> parkinglotConfigEntitiesToParkinglotConfigs(
 			List<ParkinglotConfigEntity> ParkinglotConfigEntities) {
 		return ParkinglotConfigEntities.stream().filter(Objects::nonNull)
-				.map(this::ParkinglotConfigEntityToParkinglotConfig).collect(Collectors.toList());
+				.map(this::parkinglotConfigEntityToParkinglotConfig).collect(Collectors.toList());
 	}
 
 }

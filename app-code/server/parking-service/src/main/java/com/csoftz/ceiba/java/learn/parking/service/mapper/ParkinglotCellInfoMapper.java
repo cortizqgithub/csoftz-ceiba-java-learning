@@ -73,7 +73,7 @@ public class ParkinglotCellInfoMapper {
 	 *            Source data.
 	 * @return List of ParkinglotCellInfoEntities.
 	 */
-	public List<ParkinglotCellInfoEntity> ParkinglotCellInfosToParkinglotCellInfoEntities(
+	public List<ParkinglotCellInfoEntity> parkinglotCellInfosToParkinglotCellInfoEntities(
 			List<ParkinglotCellInfo> ParkinglotCellInfos) {
 		return ParkinglotCellInfos.stream().filter(Objects::nonNull)
 				.map(this::parkinglotCellInfoToParkinglotCellInfoEntity).collect(Collectors.toList());
@@ -86,7 +86,7 @@ public class ParkinglotCellInfoMapper {
 	 *            Source Data
 	 * @return List of ParkinglotCellInfos.
 	 */
-	public List<ParkinglotCellInfo> ParkinglotCellInfoEntitiesToParkinglotCellInfos(
+	public List<ParkinglotCellInfo> parkinglotCellInfoEntitiesToParkinglotCellInfos(
 			List<ParkinglotCellInfoEntity> ParkinglotCellInfoEntities) {
 		return ParkinglotCellInfoEntities.stream().filter(Objects::nonNull)
 				.map(this::parkinglotCellInfoEntityToParkinglotCellInfo).collect(Collectors.toList());

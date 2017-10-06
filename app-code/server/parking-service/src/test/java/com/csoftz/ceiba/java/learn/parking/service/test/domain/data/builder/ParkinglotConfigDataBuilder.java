@@ -3,7 +3,7 @@
 /* Description:   Test Data Builder Pattern for ParkinglotConfig domain object*/
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.04/2017                                                 */
+/* Last Modified: Oct.06/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -20,7 +20,7 @@ import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotConfig;
  * Test Data Builder Pattern for ParkinglotConfig domain object.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.04/2017
+ * @version 1.1, Oct.06/2017
  * @since 1.8 (JDK), Oct.04/2017
  */
 public class ParkinglotConfigDataBuilder {
@@ -47,7 +47,7 @@ public class ParkinglotConfigDataBuilder {
 	 * @return A reference to itself.
 	 */
 	public ParkinglotConfigDataBuilder withId(Long id) {
-		this.id = 0L;
+		this.id = id;
 		return this;
 	}
 
@@ -59,7 +59,7 @@ public class ParkinglotConfigDataBuilder {
 	 * @return A reference to itself.
 	 */
 	public ParkinglotConfigDataBuilder withName(String name) {
-		this.name = "";
+		this.name = name;
 		return this;
 	}
 
@@ -71,7 +71,7 @@ public class ParkinglotConfigDataBuilder {
 	 * @return A reference to itself.
 	 */
 	public ParkinglotConfigDataBuilder withValue(String value) {
-		this.value = "";
+		this.value = value;
 		return this;
 	}
 
@@ -83,7 +83,7 @@ public class ParkinglotConfigDataBuilder {
 	 * @return A reference to itself.
 	 */
 	public ParkinglotConfigDataBuilder withDescription(String description) {
-		this.description = "";
+		this.description = description;
 		return this;
 	}
 

@@ -61,7 +61,7 @@ public class ParkinglotCellInfoDataBuilder {
 	}
 
 	/**
-	 * Makes a representation of Vehicle to test.
+	 * Makes a representation of ParkinglotCellInfo to test.
 	 * 
 	 * @return ParkinglotCellInfo domain object.
 	 */

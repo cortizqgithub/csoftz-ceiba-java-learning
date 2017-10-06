@@ -40,7 +40,7 @@ public class ParkinglotLogMapper {
 	 *            Source data
 	 * @return A ParkinglotLog object. NULL if source is NULL.
 	 */
-	public ParkinglotLog ParkinglotLogEntityToParkinglotLog(ParkinglotLogEntity info) {
+	public ParkinglotLog parkinglotLogEntityToParkinglotLog(ParkinglotLogEntity info) {
 		if (info == null) {
 			return null;
 		} else {
@@ -57,7 +57,7 @@ public class ParkinglotLogMapper {
 	 *            Source data
 	 * @return A ParkinglotLogEntity object. NULL if source is NULL.
 	 */
-	public ParkinglotLogEntity ParkinglotLogToParkinglotLogEntity(ParkinglotLog info) {
+	public ParkinglotLogEntity parkinglotLogToParkinglotLogEntity(ParkinglotLog info) {
 		if (info == null) {
 			return null;
 		} else {
@@ -74,8 +74,8 @@ public class ParkinglotLogMapper {
 	 *            Source data.
 	 * @return List of ParkinglotLogEntities.
 	 */
-	public List<ParkinglotLogEntity> ParkinglotLogsToParkinglotLogEntities(List<ParkinglotLog> ParkinglotLogs) {
-		return ParkinglotLogs.stream().filter(Objects::nonNull).map(this::ParkinglotLogToParkinglotLogEntity)
+	public List<ParkinglotLogEntity> parkinglotLogsToParkinglotLogEntities(List<ParkinglotLog> ParkinglotLogs) {
+		return ParkinglotLogs.stream().filter(Objects::nonNull).map(this::parkinglotLogToParkinglotLogEntity)
 				.collect(Collectors.toList());
 	}
 
@@ -86,8 +86,8 @@ public class ParkinglotLogMapper {
 	 *            Source Data
 	 * @return List of ParkinglotLogs.
 	 */
-	public List<ParkinglotLog> ParkinglotLogEntitiesToParkinglotLogs(List<ParkinglotLogEntity> ParkinglotLogEntities) {
-		return ParkinglotLogEntities.stream().filter(Objects::nonNull).map(this::ParkinglotLogEntityToParkinglotLog)
+	public List<ParkinglotLog> parkinglotLogEntitiesToParkinglotLogs(List<ParkinglotLogEntity> ParkinglotLogEntities) {
+		return ParkinglotLogEntities.stream().filter(Objects::nonNull).map(this::parkinglotLogEntityToParkinglotLog)
 				.collect(Collectors.toList());
 	}
 

@@ -19,9 +19,3 @@ jar {
                    'Main-Class':'com.ceiba.main.MainClass'
     }
 }
-
-dependencies {
-    compile('com.csoftz.ceiba.java.learn:parking-domain:1.0.0-RELEASE')
-}
-
-
