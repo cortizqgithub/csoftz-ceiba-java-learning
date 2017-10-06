@@ -34,6 +34,9 @@ public class GlobalConstants {
 	public static final int VEHICLE_TYPE_MOTORCYCLE = 2;
 	public static final int VEHICLE_TYPE_OTHER = 3;
 
+	public static final String VEHICLE_PLATE_START_WITH_A = "A";
+	public static final String VEHICLE_CANNOT_ENTER_NOT_BUSINESS_DAY = "Vehicle cannot enter because it is not in a business day";
+
 	/*
 	 * FARE values. See Key values for configuration store.
 	 */
@@ -59,6 +62,7 @@ public class GlobalConstants {
 	public static final String VEHICLE_MOTORCYCLE_FARE_HOUR_KEY = "VEHICLE_MOTORCYCLE_FARE_HOUR";
 	public static final String VEHICLE_MOTORCYCLE_FARE_DAY_KEY = "VEHICLE_MOTORCYCLE_FARE_DAY";
 	public static final String VEHICLE_MOTORCYCLE_FARE_ADDITIONAL_KEY = "VEHICLE_MOTORCYCLE_FARE_ADDITIONAL";
+	public static final String VEHICLE_CANNOT_ENTER_NOT_BUSINESS_DAY_KEY = "VEHICLE_CANNOT_ENTER_NOT_BUSINESS_DAY";
 
 	/**
 	 * 
