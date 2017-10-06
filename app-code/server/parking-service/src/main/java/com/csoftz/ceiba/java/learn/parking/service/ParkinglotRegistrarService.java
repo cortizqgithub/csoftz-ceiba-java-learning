@@ -13,9 +13,13 @@
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service;
 
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_PLATE_START_WITH_A;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_CAR;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_MOTORCYCLE;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_INVALID_ARGUMENT;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_OK;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 import com.csoftz.ceiba.java.learn.parking.domain.Vehicle;
@@ -48,8 +52,18 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 	 */
 	@Override
 	public boolean isValidPlate(Vehicle vehicle, LocalDateTime dt) {
-		// TODO Auto-generated method stub
-		return false;
+		if (vehicle == null || dt == null) {
+			return false;
+		}
+		boolean plateStartsWithA = vehicle.getPlate().startsWith(VEHICLE_PLATE_START_WITH_A);
+		if (plateStartsWithA) {
+			// Now let's check if Sunday or Monday
+			DayOfWeek dayOfWeek = dt.getDayOfWeek();
+			if (dayOfWeek == DayOfWeek.MONDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -57,7 +71,10 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 	 */
 	@Override
 	public int register(Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (vehicle == null) {
+			return PARKING_LOT_REGISTRAR_INVALID_ARGUMENT;
+		}
+
+		return PARKING_LOT_REGISTRAR_OK;
 	}
 }
