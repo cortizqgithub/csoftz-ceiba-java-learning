@@ -3,7 +3,7 @@
 /* Description:   Test for the Registrar Service.                             */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.06/2017                                                 */
+/* Last Modified: Oct.09/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -13,12 +13,25 @@
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service;
 
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_CAR_CAPACITY;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_MOTORCYCLE_CAPACITY;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_CAR;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_MOTORCYCLE;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_OTHER;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_INVALID_ARGUMENT;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_OK;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_VEHICLE_ALREADY_IN_CELL;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,15 +41,21 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotCellInfo;
+import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotLog;
 import com.csoftz.ceiba.java.learn.parking.domain.Vehicle;
+import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotCellInfoService;
+import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogService;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistrarService;
+import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.ParkinglotCellInfoDataBuilder;
+import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.ParkinglotLogDataBuilder;
 import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.VehicleDataBuilder;
 
 /**
  * Test for the Registrar Service.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.06/2017
+ * @version 1.1, Oct.09/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
 public class ParkinglotRegistrarServiceTests {
@@ -54,13 +73,17 @@ public class ParkinglotRegistrarServiceTests {
 	 */
 	private Vehicle vehicle;
 	private static IParkinglotRegistrarService parkinglotRegistrarService;
+	private static IParkinglotCellInfoService parkingCellInfoService;
+	private static IParkinglotLogService parkinglotLogService;
 
 	/**
 	 * Prepare helpers.
 	 */
 	@BeforeClass
 	public static void init() {
-		parkinglotRegistrarService = new ParkinglotRegistrarService();
+		parkingCellInfoService = mock(IParkinglotCellInfoService.class);
+		parkinglotLogService = mock(IParkinglotLogService.class);
+		parkinglotRegistrarService = new ParkinglotRegistrarService(parkingCellInfoService, parkinglotLogService);
 	}
 
 	/**
@@ -68,10 +91,15 @@ public class ParkinglotRegistrarServiceTests {
 	 */
 	@Before
 	public void setup() {
+		reset(parkingCellInfoService);
+		reset(parkinglotLogService);
 		vehicle = new VehicleDataBuilder().withId(ID).withPlate(PLATE).withType(VEHICLE_TYPE).withCylinder(CYLINDER)
 				.build();
 	}
 
+	/**
+	 * If Vehicle object to validate is NULL then returns false.
+	 */
 	@Test
 	public void givenVehicleIsNullReturnsFalse() {
 		// Arrange
@@ -251,7 +279,7 @@ public class ParkinglotRegistrarServiceTests {
 	 * Check for invalid parameter when calling register method.
 	 */
 	@Test
-	public void givenVehicleAsNullRegisterReturnsCodeInvalidArgument() {
+	public void givenVehicleAsNullRegisterReturnsOpCodeInvalidArgument() {
 		// Arrange
 		vehicle = null;
 
@@ -263,16 +291,237 @@ public class ParkinglotRegistrarServiceTests {
 	}
 
 	/**
-	 * Given Vehicle a successful registration is done.
+	 * Given a vehicle in parking lot cell,return a constant indicating that Vehicle
+	 * is already in cell.
 	 */
 	@Test
-	public void givenVehicleRegisterReturnsCodeOK() {
+	public void givenVehicleExistInParkinLotReturnsOpCodeVehicleAlreadyInCell() {
 		// Arrange
+		ParkinglotCellInfo parkinglotCellInfoCarTest = new ParkinglotCellInfoDataBuilder().withPlate(PLATE)
+				.withVehicleType(VEHICLE_TYPE_CAR).build();
+		Vehicle vehicleTest = new VehicleDataBuilder().withId(ID).withPlate(PLATE).withType(VEHICLE_TYPE)
+				.withCylinder(CYLINDER).build();
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType()))
+				.thenReturn(parkinglotCellInfoCarTest);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicleTest);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_ALREADY_IN_CELL);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType());
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	/**
+	 * When a car tries to enter the parking lot it is rejected because Parking Lot
+	 * capacity for cars is full.
+	 */
+	@Test
+	public void givenVehicleIsCarAndCapacityIsFullThenReturnOpCodeVehicleCarCapacityFull() {
+		// Arrange
+
+		// vehicle
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicle);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	/**
+	 * When a motorcycle tries to enter the parking lot it is rejected because
+	 * Parking Lot capacity for motorcycle is full.
+	 */
+	@Test
+	public void givenVehicleIsMotoryCycleAndCapacityIsFullThenReturnOpCodeVehicleMotorCycleCapacityFull() {
+		// Arrange
+		vehicle.setType(VEHICLE_TYPE_MOTORCYCLE);
+
+		// vehicle
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE)).thenReturn(VEHICLE_MOTORCYCLE_CAPACITY);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicle);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	// ICI
+
+	/**
+	 * Given a CAR may enter parking lot but cell assignment fails then returns a
+	 * cell not assigned op code.
+	 */
+	@Test
+	public void givenVehicleCarMayEnterAndCannnotAssignCellReturnsOpCodeVehicleCellNotAssigned() {
+		// Arrange
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY - 2);
+		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicle);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
+		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	/**
+	 * Given a MOTORCYCLE may enter parking lot but cell assignment fails then
+	 * returns a cell not assigned op code.
+	 */
+	@Test
+	public void givenVehicleMotorCycleMayEnterAndCannotAssignCellReturnsOpCodeVehicleCellNotAssigned() {
+		// Arrange
+		vehicle.setType(VEHICLE_TYPE_MOTORCYCLE);
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE))
+				.thenReturn(VEHICLE_MOTORCYCLE_CAPACITY - 2);
+		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicle);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
+		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	/**
+	 * Given a CAR may enter parking lot but Parking lot Log fails then returns a
+	 * Log Failure op code.
+	 */
+	@Test
+	public void givenVehicleCarMayEnterAndCannotCreateLogReturnsOpCodeLogFailure() {
+		// Arrange
+		ParkinglotCellInfo parkingCellInfo = new ParkinglotCellInfoDataBuilder().withPlate(vehicle.getPlate())
+				.withVehicleType(vehicle.getType()).build();
+
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY - 2);
+		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(parkingCellInfo);
+		when(parkinglotLogService.save(vehicle)).thenReturn(null);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicle);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
+		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
+		verify(parkinglotLogService, times(1)).save(vehicle);
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	/**
+	 * Given a MOTORCYCLE may enter parking lot but Parking lot Log fails then
+	 * returns a Log Failure op code.
+	 */
+	@Test
+	public void givenVehicleMotorcycleMayEnterAndCannotCreateLogReturnsOpCodeLogFailure() {
+		// Arrange
+		vehicle.setType(VEHICLE_TYPE_MOTORCYCLE);
+		ParkinglotCellInfo parkingCellInfo = new ParkinglotCellInfoDataBuilder().withPlate(vehicle.getPlate())
+				.withVehicleType(vehicle.getType()).build();
+
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE))
+				.thenReturn(VEHICLE_MOTORCYCLE_CAPACITY - 2);
+		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(parkingCellInfo);
+		when(parkinglotLogService.save(vehicle)).thenReturn(null);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicle);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
+		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
+		verify(parkinglotLogService, times(1)).save(vehicle);
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	/**
+	 * Given a Car then a successful registration is done. <br>
+	 * <b>NOTE:</b> This is all the happy scene for CAR registration.
+	 */
+	@Test
+	public void givenVehicleCarRegisterReturnsOpCodeOK() {
+		// Arrange
+		ParkinglotCellInfo parkingCellInfo = new ParkinglotCellInfoDataBuilder().withPlate(vehicle.getPlate())
+				.withVehicleType(vehicle.getType()).build();
+		Vehicle vehicleTest = new VehicleDataBuilder().withId(ID).withPlate(PLATE).withType(VEHICLE_TYPE)
+				.withCylinder(CYLINDER).build();
+		ParkinglotLog parkinglotLog = new ParkinglotLogDataBuilder().withPlate(vehicle.getPlate())
+				.withVehicleType(vehicle.getType()).withAdmissionDate(LocalDateTime.now()).build();
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType()))
+				.thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY - 2);
+		when(parkingCellInfoService.assign(vehicleTest.getPlate(), vehicleTest.getType())).thenReturn(parkingCellInfo);
+		when(parkinglotLogService.save(vehicleTest)).thenReturn(parkinglotLog);
+
+		// Act
+		int value = parkinglotRegistrarService.register(vehicleTest);
+
+		// Assert
+		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_OK);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
+		verify(parkingCellInfoService, times(1)).assign(vehicleTest.getPlate(), vehicleTest.getType());
+		verify(parkinglotLogService, times(1)).save(vehicleTest);
+		verifyNoMoreInteractions(parkingCellInfoService);
+	}
+
+	/**
+	 * Given a Motorcycle then a successful registration is done. <br>
+	 * <b>NOTE:</b> This is all the happy scene for CAR registration.
+	 */
+	@Test
+	public void givenVehicleMotorcycleRegisterReturnsOpCodeOK() {
+		// Arrange
+		vehicle.setType(VEHICLE_TYPE_MOTORCYCLE);
+		ParkinglotCellInfo parkingCellInfo = new ParkinglotCellInfoDataBuilder().withPlate(vehicle.getPlate())
+				.withVehicleType(vehicle.getType()).build();
+		ParkinglotLog parkinglotLog = new ParkinglotLogDataBuilder().withPlate(vehicle.getPlate())
+				.withVehicleType(vehicle.getType()).withAdmissionDate(LocalDateTime.now()).build();
+
+		// vehicle
+		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE))
+				.thenReturn(VEHICLE_MOTORCYCLE_CAPACITY - 2);
+		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(parkingCellInfo);
+		when(parkinglotLogService.save(vehicle)).thenReturn(parkinglotLog);
+
 		// Act
 		int value = parkinglotRegistrarService.register(vehicle);
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_OK);
+		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
+		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
+		verify(parkinglotLogService, times(1)).save(vehicle);
+		verifyNoMoreInteractions(parkingCellInfoService);
 	}
-
 }

@@ -52,8 +52,11 @@ public interface IParkinglotRegistrarService {
 
 	/**
 	 * When a Vehicle which is a Car or a Motorcycle wants to enter the parking lot,
-	 * it is registered and the assigned a cell to manage the parking lot
-	 * occupation.
+	 * it is registered and assigned a cell to manage the parking lot occupation.
+	 * <br>
+	 * <br>
+	 * <b>NOTE:</b> A car or vehicle cannot be registered if it does not pass proper
+	 * validation rules.
 	 * 
 	 * @param vehicle
 	 *            Required information to process a vehicle registration.

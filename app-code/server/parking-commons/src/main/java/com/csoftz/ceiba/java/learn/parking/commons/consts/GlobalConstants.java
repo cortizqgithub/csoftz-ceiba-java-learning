@@ -29,7 +29,7 @@ public class GlobalConstants {
 	 * General
 	 */
 	public static final int VEHICLE_CAR_CAPACITY = 20;
-	public static final int VEHICLE_MOTROCYCLE_CAPACITY = 10;
+	public static final int VEHICLE_MOTORCYCLE_CAPACITY = 10;
 	public static final int VEHICLE_TYPE_CAR = 1;
 	public static final int VEHICLE_TYPE_MOTORCYCLE = 2;
 	public static final int VEHICLE_TYPE_OTHER = 3;
@@ -50,7 +50,7 @@ public class GlobalConstants {
 	 * This global constant is to be defined in a configuration store for
 	 * Parkinglot. Use the key PARKINGLOG_FULL_CAPACITY.
 	 */
-	public static final int PARKINGLOG_FULL_CAPACITY = VEHICLE_CAR_CAPACITY + VEHICLE_MOTROCYCLE_CAPACITY;
+	public static final int PARKINGLOG_FULL_CAPACITY = VEHICLE_CAR_CAPACITY + VEHICLE_MOTORCYCLE_CAPACITY;
 
 	/**
 	 * Following definitions are key values for configuration store values see

@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   IPARKINGLOTLOGSERVICE.JAVA                                  */
-/* Description:   Contract to show parkinglot log activities.                 */
+/* Source File:   IVEHICLESERVICE.JAVA                                        */
+/* Description:   Vehicle Service contract to access Vehicle domain objects.  */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.09/2017                                                 */
+/* Last Modified: Oct.06/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -13,26 +13,23 @@
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service.interfaces;
 
-import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotLog;
 import com.csoftz.ceiba.java.learn.parking.domain.Vehicle;
 
 /**
- * Contract to show parkinglot log activities.
+ * Vehicle Service contract to access Vehicle domain objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
  * @version 1.1, Oct.06/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
-public interface IParkinglotLogService {
+public interface IVehicleService {
 
 	/**
-	 * When a vehicle is allowed to enter the parking lot, a record of this event is
-	 * logged in the ParkinglotLog domain object.
+	 * Locates a record with given id.
 	 * 
-	 * @param vehicle
-	 *            Information to record.
-	 * @return A ParkinglotLog domain object indicating a success operation, NULL
-	 *         otherwise.
+	 * @param id
+	 *            Identifier of the Vehicle to find.
+	 * @return Null reference if not found.
 	 */
-	public ParkinglotLog save(Vehicle vehicle);
+	Vehicle findVehicle(Long id);
 }

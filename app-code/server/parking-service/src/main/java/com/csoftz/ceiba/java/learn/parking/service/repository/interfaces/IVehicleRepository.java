@@ -1,6 +1,7 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   PARKINLOTDEPARTURESERVICE.JAVA                              */
-/* Description:   Implements contract for departure duties.                   */
+/* Source File:   IVEHICLEREPOSITORY.JAVA                                     */
+/* Description:   Vehicle Repository contract for accessing VehicleEntity     */
+/*                entity objects.                                             */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
 /* Last Modified: Oct.06/2017                                                 */
@@ -11,20 +12,16 @@
  History
  Oct.06/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
-package com.csoftz.ceiba.java.learn.parking.service;
 
-import org.springframework.stereotype.Service;
-
-import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotDepartureService;
+package com.csoftz.ceiba.java.learn.parking.service.repository.interfaces;
 
 /**
- * Implements contract for departure duties.
+ * Vehicle Repository contract for accessing VehicleEntity entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
  * @version 1.1, Oct.06/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
-@Service
-public class ParkinglotDepartureService implements IParkinglotDepartureService {
+public interface IVehicleRepository {
 
 }
