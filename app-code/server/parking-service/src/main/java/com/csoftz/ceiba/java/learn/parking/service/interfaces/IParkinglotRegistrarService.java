@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*/
 /* Source File:   IPARKINGLOTREGISTRARSERVICE.JAVA                            */
 /* Description:   Contract for registration duties.                           */
-/* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
+/* Author:        Carlos Adolfo Ortiz QuirÃ³s (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.06/2017                                                 */
+/* Last Modified: Oct.10/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -20,8 +20,8 @@ import com.csoftz.ceiba.java.learn.parking.domain.Vehicle;
 /**
  * Contract for registration duties.
  *
- * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.06/2017
+ * @author Carlos Adolfo Ortiz QuirÃ³s (COQ)
+ * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
 public interface IParkinglotRegistrarService {
