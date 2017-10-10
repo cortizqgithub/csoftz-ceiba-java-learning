@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*/
 /* Source File:   PARKINGLOTCONFIG.JAVA                                       */
 /* Description:   Domain definition to manipulate configuration objects       */
-/* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
+/* Author:        Carlos Adolfo Ortiz QuirÃ³s (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.05/2017                                                 */
+/* Last Modified: Oct.10/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -22,8 +22,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * The purpose is to hold Parking lot configuration variables in a centralized
  * may it be a database, a configuration file or any other persistence way.
  *
- * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.05/2017
+ * @author Carlos Adolfo Ortiz QuirÃ³s (COQ)
+ * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class ParkinglotConfig {

@@ -1,15 +1,15 @@
 /*----------------------------------------------------------------------------*/
 /* Source File:   PARKINGLOTCELLINFOSERVICETESTS.JAVA                         */
 /* Description:   Test suite for Parking lot Cell Info Service.               */
-/* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
-/* Date:          Oct.10/2017                                                 */
+/* Author:        Carlos Adolfo Ortiz QuirÃ³s (COQ)                            */
+/* Date:          Oct.09/2017                                                 */
 /* Last Modified: Oct.10/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------
  History
- Oct.06/2017 COQ  File created.
+ Oct.09/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service;
 
@@ -38,9 +38,9 @@ import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.Park
  * Implements Parking lot Cell Info service contract for accessing
  * ParkinglotCellInfo domain objects.
  *
- * @author Carlos Adolfo Ortiz Quirós (COQ)
+ * @author Carlos Adolfo Ortiz QuirÃ³s (COQ)
  * @version 1.1, Oct.10/2017
- * @since 1.8 (JDK), Oct.10/2017
+ * @since 1.8 (JDK), Oct.09/2017
  */
 public class ParkinglotCellInfoServiceTests {
 	/*

@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*/
 /* Source File:   PARKINGLOTREGISTRARSERVICE.JAVA                             */
 /* Description:   Implements contract for registration duties.                */
-/* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
+/* Author:        Carlos Adolfo Ortiz QuirÃ³s (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.09/2017                                                 */
+/* Last Modified: Oct.10/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -41,8 +41,8 @@ import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistr
 /**
  * Implements contract for registration duties.
  *
- * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.09/2017
+ * @author Carlos Adolfo Ortiz QuirÃ³s (COQ)
+ * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
 @Service
@@ -110,8 +110,7 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 
 		// Steps required to make a registration.
 		// 1. Vehicle Plate is not already present in Parking-Lot.
-		ParkinglotCellInfo parkinglotCellInfo = parkingCellInfoService.find(vehicle.getPlate(),
-				vehicle.getType());
+		ParkinglotCellInfo parkinglotCellInfo = parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType());
 		if (parkinglotCellInfo != null) {
 			return PARKING_LOT_REGISTRAR_VEHICLE_ALREADY_IN_CELL;
 		}

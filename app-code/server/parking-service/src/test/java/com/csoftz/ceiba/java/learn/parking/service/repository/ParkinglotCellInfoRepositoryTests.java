@@ -1,30 +1,25 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   PARKINLOTDEPARTURESERVICE.JAVA                              */
-/* Description:   Implements contract for departure duties.                   */
+/* Source File:   PARKINGLOTCELLINFOREPOSITORYTESTS.JAVA                      */
+/* Description:   Test for Parking lot Cell Info Repository.                  */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
-/* Date:          Oct.06/2017                                                 */
+/* Date:          Oct.10/2017                                                 */
 /* Last Modified: Oct.10/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------
  History
- Oct.06/2017 COQ  File created.
+ Oct.09/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
-package com.csoftz.ceiba.java.learn.parking.service;
-
-import org.springframework.stereotype.Service;
-
-import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotDepartureService;
+package com.csoftz.ceiba.java.learn.parking.service.repository;
 
 /**
- * Implements contract for departure duties.
+ * Test for Parking lot Cell Info Repository.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.06/2017
+ * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.10/2017
  */
-@Service
-public class ParkinglotDepartureService implements IParkinglotDepartureService {
+public class ParkinglotCellInfoRepositoryTests {
 
 }

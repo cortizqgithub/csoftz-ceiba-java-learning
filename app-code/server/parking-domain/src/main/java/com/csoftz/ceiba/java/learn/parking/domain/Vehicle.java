@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*/
 /* Source File:   VEHICLE.JAVA                                                */
 /* Description:   Domain definition to manipulate Vehicle objects.            */
-/* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
+/* Author:        Carlos Adolfo Ortiz QuirÃ³s (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.05/2017                                                 */
+/* Last Modified: Oct.10/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -19,8 +19,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 /**
  * Domain definition to manipulate Vehicle objects.
  *
- * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.05/2017
+ * @author Carlos Adolfo Ortiz QuirÃ³s (COQ)
+ * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class Vehicle {

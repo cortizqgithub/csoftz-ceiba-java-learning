@@ -2,9 +2,9 @@
 /* Source File:   PARKINGLOTCELLINFOSERVICE.JAVA                              */
 /* Description:   Implements Parking lot Cell Info service contract for       */
 /*                accessing ParkinglotCellInfo domain objects.                */
-/* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
-/* Date:          Oct.10/2017                                                 */
-/* Last Modified: Oct.09/2017                                                 */
+/* Author:        Carlos Adolfo Ortiz QuirÃ³s (COQ)                            */
+/* Date:          Oct.09/2017                                                 */
+/* Last Modified: Oct.10/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -24,7 +24,7 @@ import com.csoftz.ceiba.java.learn.parking.service.repository.interfaces.IParkin
  * Implements Parking lot Cell Info service contract for accessing
  * ParkinglotCellInfo domain objects.
  *
- * @author Carlos Adolfo Ortiz Quirós (COQ)
+ * @author Carlos Adolfo Ortiz QuirÃ³s (COQ)
  * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.09/2017
  */
