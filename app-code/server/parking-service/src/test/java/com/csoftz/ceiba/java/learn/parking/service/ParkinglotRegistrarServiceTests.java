@@ -301,7 +301,7 @@ public class ParkinglotRegistrarServiceTests {
 				.withVehicleType(VEHICLE_TYPE_CAR).build();
 		Vehicle vehicleTest = new VehicleDataBuilder().withId(ID).withPlate(PLATE).withType(VEHICLE_TYPE)
 				.withCylinder(CYLINDER).build();
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType()))
+		when(parkingCellInfoService.find(vehicleTest.getPlate(), vehicleTest.getType()))
 				.thenReturn(parkinglotCellInfoCarTest);
 
 		// Act
@@ -309,7 +309,7 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_ALREADY_IN_CELL);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicleTest.getPlate(), vehicleTest.getType());
 		verifyNoMoreInteractions(parkingCellInfoService);
 	}
 
@@ -322,7 +322,7 @@ public class ParkinglotRegistrarServiceTests {
 		// Arrange
 
 		// vehicle
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY);
 
 		// Act
@@ -330,7 +330,7 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicle.getPlate(), vehicle.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
 		verifyNoMoreInteractions(parkingCellInfoService);
 	}
@@ -345,7 +345,7 @@ public class ParkinglotRegistrarServiceTests {
 		vehicle.setType(VEHICLE_TYPE_MOTORCYCLE);
 
 		// vehicle
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE)).thenReturn(VEHICLE_MOTORCYCLE_CAPACITY);
 
 		// Act
@@ -353,7 +353,7 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicle.getPlate(), vehicle.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
 		verifyNoMoreInteractions(parkingCellInfoService);
 	}
@@ -367,7 +367,7 @@ public class ParkinglotRegistrarServiceTests {
 	@Test
 	public void givenVehicleCarMayEnterAndCannnotAssignCellReturnsOpCodeVehicleCellNotAssigned() {
 		// Arrange
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY - 2);
 		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 
@@ -376,7 +376,7 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicle.getPlate(), vehicle.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
 		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
 		verifyNoMoreInteractions(parkingCellInfoService);
@@ -390,7 +390,7 @@ public class ParkinglotRegistrarServiceTests {
 	public void givenVehicleMotorCycleMayEnterAndCannotAssignCellReturnsOpCodeVehicleCellNotAssigned() {
 		// Arrange
 		vehicle.setType(VEHICLE_TYPE_MOTORCYCLE);
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE))
 				.thenReturn(VEHICLE_MOTORCYCLE_CAPACITY - 2);
 		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
@@ -400,7 +400,7 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicle.getPlate(), vehicle.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
 		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
 		verifyNoMoreInteractions(parkingCellInfoService);
@@ -416,7 +416,7 @@ public class ParkinglotRegistrarServiceTests {
 		ParkinglotCellInfo parkingCellInfo = new ParkinglotCellInfoDataBuilder().withPlate(vehicle.getPlate())
 				.withVehicleType(vehicle.getType()).build();
 
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY - 2);
 		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(parkingCellInfo);
 		when(parkinglotLogService.save(vehicle)).thenReturn(null);
@@ -426,11 +426,12 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicle.getPlate(), vehicle.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
 		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
 		verify(parkinglotLogService, times(1)).save(vehicle);
 		verifyNoMoreInteractions(parkingCellInfoService);
+		verifyNoMoreInteractions(parkinglotLogService);
 	}
 
 	/**
@@ -444,7 +445,7 @@ public class ParkinglotRegistrarServiceTests {
 		ParkinglotCellInfo parkingCellInfo = new ParkinglotCellInfoDataBuilder().withPlate(vehicle.getPlate())
 				.withVehicleType(vehicle.getType()).build();
 
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE))
 				.thenReturn(VEHICLE_MOTORCYCLE_CAPACITY - 2);
 		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(parkingCellInfo);
@@ -455,11 +456,12 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicle.getPlate(), vehicle.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
 		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
 		verify(parkinglotLogService, times(1)).save(vehicle);
 		verifyNoMoreInteractions(parkingCellInfoService);
+		verifyNoMoreInteractions(parkinglotLogService);
 	}
 
 	/**
@@ -475,8 +477,7 @@ public class ParkinglotRegistrarServiceTests {
 				.withCylinder(CYLINDER).build();
 		ParkinglotLog parkinglotLog = new ParkinglotLogDataBuilder().withPlate(vehicle.getPlate())
 				.withVehicleType(vehicle.getType()).withAdmissionDate(LocalDateTime.now()).build();
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType()))
-				.thenReturn(null);
+		when(parkingCellInfoService.find(vehicleTest.getPlate(), vehicleTest.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_CAR)).thenReturn(VEHICLE_CAR_CAPACITY - 2);
 		when(parkingCellInfoService.assign(vehicleTest.getPlate(), vehicleTest.getType())).thenReturn(parkingCellInfo);
 		when(parkinglotLogService.save(vehicleTest)).thenReturn(parkinglotLog);
@@ -486,11 +487,12 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_OK);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicleTest.getPlate(), vehicleTest.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicleTest.getPlate(), vehicleTest.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_CAR);
 		verify(parkingCellInfoService, times(1)).assign(vehicleTest.getPlate(), vehicleTest.getType());
 		verify(parkinglotLogService, times(1)).save(vehicleTest);
 		verifyNoMoreInteractions(parkingCellInfoService);
+		verifyNoMoreInteractions(parkinglotLogService);
 	}
 
 	/**
@@ -507,7 +509,7 @@ public class ParkinglotRegistrarServiceTests {
 				.withVehicleType(vehicle.getType()).withAdmissionDate(LocalDateTime.now()).build();
 
 		// vehicle
-		when(parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
+		when(parkingCellInfoService.find(vehicle.getPlate(), vehicle.getType())).thenReturn(null);
 		when(parkingCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE))
 				.thenReturn(VEHICLE_MOTORCYCLE_CAPACITY - 2);
 		when(parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType())).thenReturn(parkingCellInfo);
@@ -518,10 +520,11 @@ public class ParkinglotRegistrarServiceTests {
 
 		// Assert
 		assertThat(value).isEqualTo(PARKING_LOT_REGISTRAR_OK);
-		verify(parkingCellInfoService, times(1)).findParkinglotCellInfo(vehicle.getPlate(), vehicle.getType());
+		verify(parkingCellInfoService, times(1)).find(vehicle.getPlate(), vehicle.getType());
 		verify(parkingCellInfoService, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
 		verify(parkingCellInfoService, times(1)).assign(vehicle.getPlate(), vehicle.getType());
 		verify(parkinglotLogService, times(1)).save(vehicle);
 		verifyNoMoreInteractions(parkingCellInfoService);
+		verifyNoMoreInteractions(parkinglotLogService);
 	}
 }

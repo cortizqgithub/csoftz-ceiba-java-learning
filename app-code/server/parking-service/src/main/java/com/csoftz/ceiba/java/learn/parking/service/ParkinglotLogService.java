@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotLog;
 import com.csoftz.ceiba.java.learn.parking.domain.Vehicle;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogService;
+import com.csoftz.ceiba.java.learn.parking.service.repository.interfaces.IParkinglotLogRepository;
 
 /**
  * Implements contract to show parkinglot log activities.
@@ -28,11 +29,26 @@ import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogServ
  */
 @Service
 public class ParkinglotLogService implements IParkinglotLogService {
+	/*
+	 * Dependencies
+	 */
+	private IParkinglotLogRepository parkinglotLogRepository;
 
-	@Override
-	public ParkinglotLog save(Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Constructor
+	 * 
+	 * @param parkinglotLogRepository
+	 *            Inject a parking lot repository.
+	 */
+	public ParkinglotLogService(IParkinglotLogRepository parkinglotLogRepository) {
+		this.parkinglotLogRepository = parkinglotLogRepository;
 	}
 
+	/**
+	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogService#save(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
+	 */
+	@Override
+	public ParkinglotLog save(Vehicle vehicle) {
+		return parkinglotLogRepository.save(vehicle);
+	}
 }

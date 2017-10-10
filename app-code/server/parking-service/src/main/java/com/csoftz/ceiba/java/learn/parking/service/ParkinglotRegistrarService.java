@@ -110,7 +110,7 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 
 		// Steps required to make a registration.
 		// 1. Vehicle Plate is not already present in Parking-Lot.
-		ParkinglotCellInfo parkinglotCellInfo = parkingCellInfoService.findParkinglotCellInfo(vehicle.getPlate(),
+		ParkinglotCellInfo parkinglotCellInfo = parkingCellInfoService.find(vehicle.getPlate(),
 				vehicle.getType());
 		if (parkinglotCellInfo != null) {
 			return PARKING_LOT_REGISTRAR_VEHICLE_ALREADY_IN_CELL;

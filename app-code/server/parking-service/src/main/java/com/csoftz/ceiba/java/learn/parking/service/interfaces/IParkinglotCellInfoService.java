@@ -35,7 +35,7 @@ public interface IParkinglotCellInfoService {
 	 *            Holds 1:Car, 2:Motorcycle.
 	 * @return Null if not found.
 	 */
-	public ParkinglotCellInfo findParkinglotCellInfo(String plate, int vehicleType);
+	public ParkinglotCellInfo find(String plate, int vehicleType);
 
 	/**
 	 * Looks for the capacity of cars or motorcycles. If Car is set, then the
