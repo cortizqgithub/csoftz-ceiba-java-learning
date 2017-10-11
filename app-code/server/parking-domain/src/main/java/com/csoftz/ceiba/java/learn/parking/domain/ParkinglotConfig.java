@@ -3,7 +3,7 @@
 /* Description:   Domain definition to manipulate configuration objects       */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.11/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -23,7 +23,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * may it be a database, a configuration file or any other persistence way.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.11/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class ParkinglotConfig {
@@ -31,6 +31,16 @@ public class ParkinglotConfig {
 	private String name;
 	private String value;
 	private String description;
+
+	/**
+	 * Default constructor.
+	 */
+	public ParkinglotConfig() {
+		this.id = 0L;
+		this.name = "";
+		this.value = "";
+		this.description = "";
+	}
 
 	/**
 	 * Constructor with fields.

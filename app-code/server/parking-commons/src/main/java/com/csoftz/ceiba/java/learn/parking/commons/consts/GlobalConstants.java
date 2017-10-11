@@ -3,7 +3,7 @@
 /* Description:   General constants definitions.                              */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.05/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.11/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -21,7 +21,7 @@ package com.csoftz.ceiba.java.learn.parking.commons.consts;
  * stored values. Read along javadocs for this class.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.11/2017
  * @since 1.8 (JDK), Oct.05/2017
  */
 public class GlobalConstants {
@@ -66,7 +66,7 @@ public class GlobalConstants {
 
 	/**
 	 * 
-	 * /** Defined to make SonarLint compliant.
+	 * Defined to make SonarLint compliant.
 	 */
 	private GlobalConstants() {
 		throw new IllegalStateException("Utility class");

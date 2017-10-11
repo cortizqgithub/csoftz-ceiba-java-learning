@@ -3,7 +3,7 @@
 /* Description:   Domain definition to manipulate Vehicle objects.            */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.11/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * Domain definition to manipulate Vehicle objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.11/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class Vehicle {
@@ -28,6 +28,16 @@ public class Vehicle {
 	private String plate;
 	private int type;
 	private int cylinder;
+
+	/**
+	 * Default constructor.
+	 */
+	public Vehicle() {
+		this.id = 0L;
+		this.plate = "";
+		this.type = 0;
+		this.cylinder = 0;
+	}
 
 	/**
 	 * Constructor with fields
