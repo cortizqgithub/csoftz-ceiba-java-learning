@@ -13,6 +13,10 @@
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service.controller;
 
+import java.time.LocalDateTime;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +51,17 @@ public class ParkinglotRegistrarController {
 	}
 
 	@GetMapping("/{plate}/{vehicleType}")
-	public Vehicle registerVehicle(@PathVariable String plate, @PathVariable int vehicleType) {
-		Vehicle vehicle = new Vehicle(1L, plate, vehicleType, 120);
-		parkinglotRegistrarService.register(vehicle);
-		return vehicle;
+	public ResponseEntity<Integer> registerVehicle(@PathVariable String plate, @PathVariable int vehicleType) {
+		Vehicle vehicle = new Vehicle(0L, plate, vehicleType, 120);
+
+		if (!parkinglotRegistrarService.isValid(vehicle)) {
+			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+		}
+		if (!parkinglotRegistrarService.isValidPlate(vehicle, LocalDateTime.now())) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+
+		int value = parkinglotRegistrarService.register(vehicle);
+		return new ResponseEntity<>(value, HttpStatus.OK);
 	}
 }
