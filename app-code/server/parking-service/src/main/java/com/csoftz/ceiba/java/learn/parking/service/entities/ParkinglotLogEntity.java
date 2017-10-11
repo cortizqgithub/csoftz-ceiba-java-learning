@@ -57,6 +57,12 @@ public class ParkinglotLogEntity {
 	private LocalDateTime departureDate;
 
 	/**
+	 * Default constructor.
+	 */
+	public ParkinglotLogEntity() {
+	}
+
+	/**
 	 * Constructor with parameters.
 	 * 
 	 * @param id

@@ -18,6 +18,7 @@ import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_CAR;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_MOTORCYCLE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
@@ -30,7 +31,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotCellInfo;
+import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotCellInfoEntity;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotCellInfoService;
+import com.csoftz.ceiba.java.learn.parking.service.mapper.ParkinglotCellInfoMapper;
 import com.csoftz.ceiba.java.learn.parking.service.repository.interfaces.IParkinglotCellInfoRepository;
 import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.ParkinglotCellInfoDataBuilder;
 
@@ -55,14 +58,17 @@ public class ParkinglotCellInfoServiceTests {
 	private ParkinglotCellInfo parkinglotCellInfoTest;
 	private static IParkinglotCellInfoRepository parkinglotCellInfoRepository;
 	private static IParkinglotCellInfoService parkinglotCellInfoService;
+	private static ParkinglotCellInfoMapper parkinglotCellInfoMapper;
 
 	/**
 	 * Prepare helpers.
 	 */
 	@BeforeClass
 	public static void init() {
+		parkinglotCellInfoMapper = new ParkinglotCellInfoMapper();
 		parkinglotCellInfoRepository = mock(IParkinglotCellInfoRepository.class);
-		parkinglotCellInfoService = new ParkinglotCellInfoService(parkinglotCellInfoRepository);
+		parkinglotCellInfoService = new ParkinglotCellInfoService(parkinglotCellInfoRepository,
+				parkinglotCellInfoMapper);
 	}
 
 	/**
@@ -82,14 +88,14 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenPlateAndVehicleTypeFindIfInCellReturnsNotFoundNull() {
 		// Arrange
-		when(parkinglotCellInfoRepository.find(PLATE, VEHICLE_TYPE)).thenReturn(null);
+		when(parkinglotCellInfoRepository.findByPlateAndVehicleType(PLATE, VEHICLE_TYPE)).thenReturn(null);
 
 		// Act
 		ParkinglotCellInfo parkinglotCellInfo = parkinglotCellInfoService.find(PLATE, VEHICLE_TYPE);
 
 		// Assert
 		assertThat(parkinglotCellInfo).isNull();
-		verify(parkinglotCellInfoRepository, times(1)).find(PLATE, VEHICLE_TYPE);
+		verify(parkinglotCellInfoRepository, times(1)).findByPlateAndVehicleType(PLATE, VEHICLE_TYPE);
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
 
@@ -100,14 +106,17 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenPlateAndVehicleTypeFindIfInCellReturnsFoundNotNull() {
 		// Arrange
-		when(parkinglotCellInfoRepository.find(PLATE, VEHICLE_TYPE)).thenReturn(parkinglotCellInfoTest);
+		ParkinglotCellInfoEntity parkinglotCellInfoEntityTest = parkinglotCellInfoMapper
+				.parkinglotCellInfoToParkinglotCellInfoEntity(parkinglotCellInfoTest);
+		when(parkinglotCellInfoRepository.findByPlateAndVehicleType(PLATE, VEHICLE_TYPE))
+				.thenReturn(parkinglotCellInfoEntityTest);
 
 		// Act
 		ParkinglotCellInfo parkinglotCellInfo = parkinglotCellInfoService.find(PLATE, VEHICLE_TYPE);
 
 		// Assert
 		assertThat(parkinglotCellInfo).isNotNull();
-		verify(parkinglotCellInfoRepository, times(1)).find(PLATE, VEHICLE_TYPE);
+		verify(parkinglotCellInfoRepository, times(1)).findByPlateAndVehicleType(PLATE, VEHICLE_TYPE);
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
 
@@ -117,14 +126,14 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenVehicleTypeCarAndTakeCapacityForReturnsLessThanCarCapacity() {
 		// Arrange
-		when(parkinglotCellInfoRepository.takeCapacityFor(VEHICLE_TYPE)).thenReturn(0);
+		when(parkinglotCellInfoRepository.countByVehicleType(VEHICLE_TYPE)).thenReturn(0);
 
 		// Act
 		int capacity = parkinglotCellInfoService.takeCapacityFor(VEHICLE_TYPE);
 
 		// Assert
 		assertThat(capacity).isEqualTo(0);
-		verify(parkinglotCellInfoRepository, times(1)).takeCapacityFor(VEHICLE_TYPE);
+		verify(parkinglotCellInfoRepository, times(1)).countByVehicleType(VEHICLE_TYPE);
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
 
@@ -134,14 +143,14 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenVehicleTypeCarAndTakeCapacityForReturnsFullCarCapacity() {
 		// Arrange
-		when(parkinglotCellInfoRepository.takeCapacityFor(VEHICLE_TYPE)).thenReturn(VEHICLE_CAR_CAPACITY);
+		when(parkinglotCellInfoRepository.countByVehicleType(VEHICLE_TYPE)).thenReturn(VEHICLE_CAR_CAPACITY);
 
 		// Act
 		int capacity = parkinglotCellInfoService.takeCapacityFor(VEHICLE_TYPE);
 
 		// Assert
 		assertThat(capacity).isEqualTo(VEHICLE_CAR_CAPACITY);
-		verify(parkinglotCellInfoRepository, times(1)).takeCapacityFor(VEHICLE_TYPE);
+		verify(parkinglotCellInfoRepository, times(1)).countByVehicleType(VEHICLE_TYPE);
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
 
@@ -151,14 +160,14 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenVehicleTypeMotorycycleAndTakeCapacityForReturnsLessThanMotorycycleCapacity() {
 		// Arrange
-		when(parkinglotCellInfoRepository.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE)).thenReturn(0);
+		when(parkinglotCellInfoRepository.countByVehicleType(VEHICLE_TYPE_MOTORCYCLE)).thenReturn(0);
 
 		// Act
 		int capacity = parkinglotCellInfoService.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
 
 		// Assert
 		assertThat(capacity).isEqualTo(0);
-		verify(parkinglotCellInfoRepository, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
+		verify(parkinglotCellInfoRepository, times(1)).countByVehicleType(VEHICLE_TYPE_MOTORCYCLE);
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
 
@@ -168,7 +177,7 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenVehicleTypeMotorycycleAndTakeCapacityForReturnsFullMotorycycleCapacity() {
 		// Arrange
-		when(parkinglotCellInfoRepository.takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE))
+		when(parkinglotCellInfoRepository.countByVehicleType(VEHICLE_TYPE_MOTORCYCLE))
 				.thenReturn(VEHICLE_MOTORCYCLE_CAPACITY);
 
 		// Act
@@ -176,7 +185,7 @@ public class ParkinglotCellInfoServiceTests {
 
 		// Assert
 		assertThat(capacity).isEqualTo(VEHICLE_MOTORCYCLE_CAPACITY);
-		verify(parkinglotCellInfoRepository, times(1)).takeCapacityFor(VEHICLE_TYPE_MOTORCYCLE);
+		verify(parkinglotCellInfoRepository, times(1)).countByVehicleType(VEHICLE_TYPE_MOTORCYCLE);
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
 
@@ -187,14 +196,14 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenPlateAndVehicleTypeThenAssignCellReturnsNull() {
 		// Arrange
-		when(parkinglotCellInfoRepository.assign(PLATE, VEHICLE_TYPE)).thenReturn(null);
+		when(parkinglotCellInfoRepository.save(any(ParkinglotCellInfoEntity.class))).thenReturn(null);
 
 		// Act
 		ParkinglotCellInfo parkingCellInfo = parkinglotCellInfoService.assign(PLATE, VEHICLE_TYPE);
 
 		// Assert
 		assertThat(parkingCellInfo).isNull();
-		verify(parkinglotCellInfoRepository, times(1)).assign(PLATE, VEHICLE_TYPE);
+		verify(parkinglotCellInfoRepository, times(1)).save(any(ParkinglotCellInfoEntity.class));
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
 
@@ -205,15 +214,16 @@ public class ParkinglotCellInfoServiceTests {
 	@Test
 	public void givenPlateAndVehicleTypeThenAssignCellReturnsNotNull() {
 		// Arrange
-		when(parkinglotCellInfoRepository.assign(PLATE, VEHICLE_TYPE)).thenReturn(parkinglotCellInfoTest);
+		ParkinglotCellInfoEntity parkinglotCellInfoEntity = new ParkinglotCellInfoEntity(PLATE, VEHICLE_TYPE);
+		when(parkinglotCellInfoRepository.save(any(ParkinglotCellInfoEntity.class)))
+				.thenReturn(parkinglotCellInfoEntity);
 
 		// Act
 		ParkinglotCellInfo parkingCellInfo = parkinglotCellInfoService.assign(PLATE, VEHICLE_TYPE);
 
 		// Assert
 		assertThat(parkingCellInfo).isNotNull();
-		verify(parkinglotCellInfoRepository, times(1)).assign(PLATE, VEHICLE_TYPE);
+		verify(parkinglotCellInfoRepository, times(1)).save(any(ParkinglotCellInfoEntity.class));
 		verifyNoMoreInteractions(parkinglotCellInfoRepository);
 	}
-
 }

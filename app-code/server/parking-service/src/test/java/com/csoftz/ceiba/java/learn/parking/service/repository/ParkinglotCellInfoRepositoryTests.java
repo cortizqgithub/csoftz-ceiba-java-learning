@@ -13,6 +13,8 @@
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service.repository;
 
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_CAR;
+
 /**
  * Test for Parking lot Cell Info Repository.
  *
@@ -20,6 +22,32 @@ package com.csoftz.ceiba.java.learn.parking.service.repository;
  * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.10/2017
  */
+// @RunWith(SpringRunner.class)
+// @DataJpaTest(showSql = true)
+// @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class ParkinglotCellInfoRepositoryTests {
+	private static final Long ID = 1L;
+	private static final String PLATE = "KDF123";
+	private static final String PLATE_STARTS_WITH_A = "ABC123";
+	private static final int VEHICLE_TYPE = VEHICLE_TYPE_CAR;
+	private static final int CYLINDER = 120;
+
+	// @Autowired
+	// private TestEntityManager entityManager;
+
+	// @Autowired
+	// private IParkinglotCellInfoRepository parkinglotCellInfoRepository;
+
+	// @Test
+	// public void saveACellInfo() {
+	// ParkinglotCellInfoEntity parkinglotCellInfoEntity = new
+	// ParkinglotCellInfoEntityDataBuilder().withPlate(PLATE)
+	// .withVehicleType(VEHICLE_TYPE).build();
+	// entityManager.persist(parkinglotCellInfoEntity);
+	//
+	// parkinglotCellInfoEntity =
+	// parkinglotCellInfoRepository.findByPlateAndVehicleType(PLATE, VEHICLE_TYPE);
+	// assertThat(parkinglotCellInfoEntity).isNotNull();
+	// }
 
 }

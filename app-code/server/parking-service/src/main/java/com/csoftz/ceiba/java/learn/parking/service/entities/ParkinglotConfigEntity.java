@@ -52,6 +52,12 @@ public class ParkinglotConfigEntity {
 	private String description;
 
 	/**
+	 * Default constructor
+	 */
+	public ParkinglotConfigEntity() {
+	}
+
+	/**
 	 * Constructor with fields.
 	 * 
 	 * @param id

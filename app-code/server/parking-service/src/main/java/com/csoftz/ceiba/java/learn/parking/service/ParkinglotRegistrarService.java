@@ -76,7 +76,7 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 			return false;
 		}
 		int vehicleType = vehicle.getType();
-		return (vehicleType == VEHICLE_TYPE_CAR || vehicleType == VEHICLE_TYPE_MOTORCYCLE);
+		return vehicleType == VEHICLE_TYPE_CAR || vehicleType == VEHICLE_TYPE_MOTORCYCLE;
 	}
 
 	/**

@@ -14,17 +14,22 @@
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service.repository.interfaces;
 
-import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotCellInfo;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotCellInfoEntity;
 
 /**
  * Parkinglot Cell Info repository contract for accessing
- * ParkinglotCellInfoEntity entity objects.
+ * ParkinglotCellInfoEntity entity objects. <br>
+ * <b>NOTE:<b> Delegates to Spring Data JPA framework.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
  * @version 1.1, Oct.10/2017
  * @since 1.8 (JDK), Oct.09/2017
  */
-public interface IParkinglotCellInfoRepository {
+@Repository
+public interface IParkinglotCellInfoRepository extends CrudRepository<ParkinglotCellInfoEntity, Long> {
 	/**
 	 * Locates a parking lot cell info for plate/vehicleType key.
 	 * 
@@ -34,7 +39,7 @@ public interface IParkinglotCellInfoRepository {
 	 *            Holds 1:Car, 2:Motorcycle.
 	 * @return Null if not found.
 	 */
-	public ParkinglotCellInfo find(String plate, int vehicleType);
+	public ParkinglotCellInfoEntity findByPlateAndVehicleType(String plate, int vehicleType);
 
 	/**
 	 * Looks for the capacity of cars or motorcycles. If Car is set, then the
@@ -45,17 +50,5 @@ public interface IParkinglotCellInfoRepository {
 	 *            Holds 1:Car, 2:Motorcycle.
 	 * @return Number of slots actually used.
 	 */
-	public int takeCapacityFor(int vehicleType);
-
-	/**
-	 * Given the plate and vehicle type, it creates a reservation in the parking lot
-	 * slot (cell) to indicate that vehicle is inside the parking lot system.
-	 * 
-	 * @param plate
-	 *            Description of the Vehicle.
-	 * @param vehicleType
-	 *            Holds 1:Car, 2:Motorcycle.
-	 * @return A record containing the newly created information, NULL otherwise.
-	 */
-	public ParkinglotCellInfo assign(String plate, int vehicleType);
+	public int countByVehicleType(int vehicleType);
 }

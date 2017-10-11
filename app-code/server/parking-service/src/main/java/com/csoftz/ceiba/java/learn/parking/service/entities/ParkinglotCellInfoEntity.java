@@ -43,6 +43,12 @@ public class ParkinglotCellInfoEntity {
 	private int vehicleType;
 
 	/**
+	 * Default constructor
+	 */
+	public ParkinglotCellInfoEntity() {
+	}
+
+	/**
 	 * Constructor with fields.
 	 * 
 	 * @param plate

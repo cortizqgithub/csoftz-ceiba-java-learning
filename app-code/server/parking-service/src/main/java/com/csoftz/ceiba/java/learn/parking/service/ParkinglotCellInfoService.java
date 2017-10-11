@@ -17,7 +17,9 @@ package com.csoftz.ceiba.java.learn.parking.service;
 import org.springframework.stereotype.Service;
 
 import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotCellInfo;
+import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotCellInfoEntity;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotCellInfoService;
+import com.csoftz.ceiba.java.learn.parking.service.mapper.ParkinglotCellInfoMapper;
 import com.csoftz.ceiba.java.learn.parking.service.repository.interfaces.IParkinglotCellInfoRepository;
 
 /**
@@ -34,6 +36,7 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	 * Dependencies
 	 */
 	private IParkinglotCellInfoRepository parkinglotCellInfoRepository;
+	private ParkinglotCellInfoMapper parkinglotCellInfoMapper;
 
 	/**
 	 * Constructor
@@ -41,8 +44,10 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	 * @param parkinglotCellInfoRepository
 	 *            Inject a parking lot log repository.
 	 */
-	public ParkinglotCellInfoService(IParkinglotCellInfoRepository parkinglotCellInfoRepository) {
+	public ParkinglotCellInfoService(IParkinglotCellInfoRepository parkinglotCellInfoRepository,
+			ParkinglotCellInfoMapper parkinglotCellInfoMapper) {
 		this.parkinglotCellInfoRepository = parkinglotCellInfoRepository;
+		this.parkinglotCellInfoMapper = parkinglotCellInfoMapper;
 	}
 
 	/**
@@ -51,7 +56,11 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	 */
 	@Override
 	public ParkinglotCellInfo find(String plate, int vehicleType) {
-		return parkinglotCellInfoRepository.find(plate, vehicleType);
+		ParkinglotCellInfoEntity parkinglotCellInfoEntity = parkinglotCellInfoRepository
+				.findByPlateAndVehicleType(plate, vehicleType);
+		ParkinglotCellInfo parkinglotCellInfo = parkinglotCellInfoMapper
+				.parkinglotCellInfoEntityToParkinglotCellInfo(parkinglotCellInfoEntity);
+		return parkinglotCellInfo;
 	}
 
 	/**
@@ -59,7 +68,7 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	 */
 	@Override
 	public int takeCapacityFor(int vehicleType) {
-		return parkinglotCellInfoRepository.takeCapacityFor(vehicleType);
+		return parkinglotCellInfoRepository.countByVehicleType(vehicleType);
 	}
 
 	/**
@@ -68,6 +77,10 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	 */
 	@Override
 	public ParkinglotCellInfo assign(String plate, int vehicleType) {
-		return parkinglotCellInfoRepository.assign(plate, vehicleType);
+		ParkinglotCellInfoEntity parkinglotCellInfoEntity = new ParkinglotCellInfoEntity(plate, vehicleType);
+		parkinglotCellInfoEntity = parkinglotCellInfoRepository.save(parkinglotCellInfoEntity);
+		ParkinglotCellInfo parkinglotCellInfo = parkinglotCellInfoMapper
+				.parkinglotCellInfoEntityToParkinglotCellInfo(parkinglotCellInfoEntity);
+		return parkinglotCellInfo;
 	}
 }

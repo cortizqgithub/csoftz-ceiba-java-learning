@@ -48,6 +48,12 @@ public class VehicleEntity {
 	private int cylinder;
 
 	/**
+	 * Default constructor
+	 */
+	public VehicleEntity() {
+	}
+
+	/**
 	 * Constructor with fields
 	 * 
 	 * @param id
