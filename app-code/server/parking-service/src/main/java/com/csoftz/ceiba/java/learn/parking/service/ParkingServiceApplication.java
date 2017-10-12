@@ -29,13 +29,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ParkingServiceApplication {
 
 	/**
-	 * SonarLint compliant.
-	 */
-	private ParkingServiceApplication() {
-
-	}
-
-	/**
 	 * Entry point for Spring Boot App.
 	 * 
 	 * @param args
