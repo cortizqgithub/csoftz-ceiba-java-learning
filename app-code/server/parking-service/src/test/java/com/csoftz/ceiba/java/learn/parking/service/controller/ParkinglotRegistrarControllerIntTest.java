@@ -1,9 +1,10 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   PARKINGLOTREGISTRARCONTROLLERTESTS.JAVA                     */
-/* Description:   Controller to register a Vehicle to Parking lot (Tests)     */
+/* Source File:   PARKINGLOTREGISTRARCONTROLLERIntTest.JAVA                   */
+/* Description:   Controller to register a Vehicle to Parking lot             */
+/*                (Integration test).                                         */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.11/2017                                                 */
-/* Last Modified: Oct.11/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -32,21 +33,21 @@ import com.csoftz.ceiba.java.learn.parking.service.ParkingServiceApplication;
 import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.VehicleDataBuilder;
 
 /**
- * Controller to register a Vehicle to Parking lot (Tests).
+ * Controller to register a Vehicle to Parking lot. This is an integration test.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.11/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.11/2017
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = ParkingServiceApplication.class)
 @AutoConfigureMockMvc
-public class ParkinglotRegistrarControllerTests {
+public class ParkinglotRegistrarControllerIntTest {
 	@Autowired
 	private MockMvc restRegistarMocMvc;
 
 	/**
-	 * Perform an END point test for /
+	 * Perform an END point test for /api/v1/parking/registrar
 	 * 
 	 * @throws Exception
 	 */
