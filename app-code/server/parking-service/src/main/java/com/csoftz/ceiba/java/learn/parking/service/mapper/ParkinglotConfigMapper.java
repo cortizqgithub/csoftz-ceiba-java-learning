@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,7 +27,7 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotConfigEnti
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
@@ -43,9 +43,7 @@ public class ParkinglotConfigMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotConfig parkinglotConfig = new ParkinglotConfig(info.getId(), info.getName(), info.getValue(),
-					info.getDescription());
-			return parkinglotConfig;
+			return new ParkinglotConfig(info.getId(), info.getName(), info.getValue(), info.getDescription());
 		}
 	}
 
@@ -60,36 +58,33 @@ public class ParkinglotConfigMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotConfigEntity parkinglotConfigEntity = new ParkinglotConfigEntity(info.getId(), info.getName(),
-					info.getValue(), info.getDescription());
-			return parkinglotConfigEntity;
+			return new ParkinglotConfigEntity(info.getId(), info.getName(), info.getValue(), info.getDescription());
 		}
 	}
 
 	/**
 	 * Maps a list of ParkinglotConfigs to ParkinglotConfigEntities objects
 	 * 
-	 * @param ParkinglotConfigs
+	 * @param parkinglotConfigs
 	 *            Source data.
 	 * @return List of ParkinglotConfigEntities.
 	 */
 	public List<ParkinglotConfigEntity> parkinglotConfigsToParkinglotConfigEntities(
-			List<ParkinglotConfig> ParkinglotConfigs) {
-		return ParkinglotConfigs.stream().filter(Objects::nonNull).map(this::parkinglotConfigToParkinglotConfigEntity)
+			List<ParkinglotConfig> parkinglotConfigs) {
+		return parkinglotConfigs.stream().filter(Objects::nonNull).map(this::parkinglotConfigToParkinglotConfigEntity)
 				.collect(Collectors.toList());
 	}
 
 	/**
 	 * Maps a list of ParkinglotConfigEntities to ParkinglotConfigs
 	 * 
-	 * @param ParkinglotConfigEntities
+	 * @param parkinglotConfigEntities
 	 *            Source Data
 	 * @return List of ParkinglotConfigs.
 	 */
 	public List<ParkinglotConfig> parkinglotConfigEntitiesToParkinglotConfigs(
-			List<ParkinglotConfigEntity> ParkinglotConfigEntities) {
-		return ParkinglotConfigEntities.stream().filter(Objects::nonNull)
+			List<ParkinglotConfigEntity> parkinglotConfigEntities) {
+		return parkinglotConfigEntities.stream().filter(Objects::nonNull)
 				.map(this::parkinglotConfigEntityToParkinglotConfig).collect(Collectors.toList());
 	}
-
 }

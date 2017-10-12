@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,7 +27,7 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotLogEntity;
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
@@ -44,9 +44,8 @@ public class ParkinglotLogMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotLog parkinglotLog = new ParkinglotLog(info.getId(), info.getPlate(), info.getVehicleType(),
-					info.getAdmissionDate(), info.getDepartureDate());
-			return parkinglotLog;
+			return new ParkinglotLog(info.getId(), info.getPlate(), info.getVehicleType(), info.getAdmissionDate(),
+					info.getDepartureDate());
 		}
 	}
 
@@ -61,34 +60,32 @@ public class ParkinglotLogMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotLogEntity parkinglotLogEntity = new ParkinglotLogEntity(info.getId(), info.getPlate(),
-					info.getVehicleType(), info.getAdmissionDate(), info.getDepartureDate());
-			return parkinglotLogEntity;
+			return new ParkinglotLogEntity(info.getId(), info.getPlate(), info.getVehicleType(),
+					info.getAdmissionDate(), info.getDepartureDate());
 		}
 	}
 
 	/**
 	 * Maps a list of ParkinglotLogs to ParkinglotLogEntities objects
 	 * 
-	 * @param ParkinglotLogs
+	 * @param parkinglotLogs
 	 *            Source data.
 	 * @return List of ParkinglotLogEntities.
 	 */
-	public List<ParkinglotLogEntity> parkinglotLogsToParkinglotLogEntities(List<ParkinglotLog> ParkinglotLogs) {
-		return ParkinglotLogs.stream().filter(Objects::nonNull).map(this::parkinglotLogToParkinglotLogEntity)
+	public List<ParkinglotLogEntity> parkinglotLogsToParkinglotLogEntities(List<ParkinglotLog> parkinglotLogs) {
+		return parkinglotLogs.stream().filter(Objects::nonNull).map(this::parkinglotLogToParkinglotLogEntity)
 				.collect(Collectors.toList());
 	}
 
 	/**
 	 * Maps a list of ParkinglotLogEntities to ParkinglotLogs
 	 * 
-	 * @param ParkinglotLogEntities
+	 * @param parkinglotLogEntities
 	 *            Source Data
 	 * @return List of ParkinglotLogs.
 	 */
-	public List<ParkinglotLog> parkinglotLogEntitiesToParkinglotLogs(List<ParkinglotLogEntity> ParkinglotLogEntities) {
-		return ParkinglotLogEntities.stream().filter(Objects::nonNull).map(this::parkinglotLogEntityToParkinglotLog)
+	public List<ParkinglotLog> parkinglotLogEntitiesToParkinglotLogs(List<ParkinglotLogEntity> parkinglotLogEntities) {
+		return parkinglotLogEntities.stream().filter(Objects::nonNull).map(this::parkinglotLogEntityToParkinglotLog)
 				.collect(Collectors.toList());
 	}
-
 }

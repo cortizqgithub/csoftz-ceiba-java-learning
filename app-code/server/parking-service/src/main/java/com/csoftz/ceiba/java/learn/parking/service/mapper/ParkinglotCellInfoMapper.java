@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,7 +27,7 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotCellInfoEn
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
@@ -44,8 +44,7 @@ public class ParkinglotCellInfoMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotCellInfo parkinglotCellInfo = new ParkinglotCellInfo(info.getPlate(), info.getVehicleType());
-			return parkinglotCellInfo;
+			return new ParkinglotCellInfo(info.getPlate(), info.getVehicleType());
 		}
 	}
 
@@ -60,36 +59,33 @@ public class ParkinglotCellInfoMapper {
 		if (info == null) {
 			return null;
 		} else {
-			ParkinglotCellInfoEntity parkinglotCellInfoEntity = new ParkinglotCellInfoEntity(info.getPlate(),
-					info.getVehicleType());
-			return parkinglotCellInfoEntity;
+			return new ParkinglotCellInfoEntity(info.getPlate(), info.getVehicleType());
 		}
 	}
 
 	/**
 	 * Maps a list of ParkinglotCellInfos to ParkinglotCellInfoEntities objects
 	 * 
-	 * @param ParkinglotCellInfos
+	 * @param parkinglotCellInfos
 	 *            Source data.
 	 * @return List of ParkinglotCellInfoEntities.
 	 */
 	public List<ParkinglotCellInfoEntity> parkinglotCellInfosToParkinglotCellInfoEntities(
-			List<ParkinglotCellInfo> ParkinglotCellInfos) {
-		return ParkinglotCellInfos.stream().filter(Objects::nonNull)
+			List<ParkinglotCellInfo> parkinglotCellInfos) {
+		return parkinglotCellInfos.stream().filter(Objects::nonNull)
 				.map(this::parkinglotCellInfoToParkinglotCellInfoEntity).collect(Collectors.toList());
 	}
 
 	/**
 	 * Maps a list of ParkinglotCellInfoEntities to ParkinglotCellInfos
 	 * 
-	 * @param ParkinglotCellInfoEntities
+	 * @param parkinglotCellInfoEntities
 	 *            Source Data
 	 * @return List of ParkinglotCellInfos.
 	 */
 	public List<ParkinglotCellInfo> parkinglotCellInfoEntitiesToParkinglotCellInfos(
-			List<ParkinglotCellInfoEntity> ParkinglotCellInfoEntities) {
-		return ParkinglotCellInfoEntities.stream().filter(Objects::nonNull)
+			List<ParkinglotCellInfoEntity> parkinglotCellInfoEntities) {
+		return parkinglotCellInfoEntities.stream().filter(Objects::nonNull)
 				.map(this::parkinglotCellInfoEntityToParkinglotCellInfo).collect(Collectors.toList());
 	}
-
 }

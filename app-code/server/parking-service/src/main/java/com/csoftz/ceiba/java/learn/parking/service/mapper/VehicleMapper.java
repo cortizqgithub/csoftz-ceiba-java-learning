@@ -3,7 +3,7 @@
 /* Description:   Converts from Domain to Entity objects.                     */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.04/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -27,7 +27,7 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.VehicleEntity;
  * Converts from Domain to Entity objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.04/2017
  */
 @Component
@@ -44,8 +44,7 @@ public class VehicleMapper {
 		if (info == null) {
 			return null;
 		} else {
-			Vehicle vehicle = new Vehicle(info.getId(), info.getPlate(), info.getType(), info.getCylinder());
-			return vehicle;
+			return new Vehicle(info.getId(), info.getPlate(), info.getType(), info.getCylinder());
 		}
 	}
 
@@ -60,9 +59,7 @@ public class VehicleMapper {
 		if (info == null) {
 			return null;
 		} else {
-			VehicleEntity vehicleEntity = new VehicleEntity(info.getId(), info.getPlate(), info.getType(),
-					info.getCylinder());
-			return vehicleEntity;
+			return new VehicleEntity(info.getId(), info.getPlate(), info.getType(), info.getCylinder());
 		}
 	}
 

@@ -3,7 +3,7 @@
 /* Description:   Implements contract for registration duties.                */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -42,7 +42,7 @@ import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistr
  * Implements contract for registration duties.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
 @Service
@@ -118,15 +118,11 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 		// 2. Parking lot has capacity for vehicle type.
 		int vehicleType = vehicle.getType();
 		int vehicleSlotCapacitySoFar = parkingCellInfoService.takeCapacityFor(vehicleType);
-		if (vehicleType == VEHICLE_TYPE_CAR) {
-			if (vehicleSlotCapacitySoFar == VEHICLE_CAR_CAPACITY) {
-				return PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL;
-			}
+		if (vehicleType == VEHICLE_TYPE_CAR && vehicleSlotCapacitySoFar == VEHICLE_CAR_CAPACITY) {
+			return PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL;
 		}
-		if (vehicleType == VEHICLE_TYPE_MOTORCYCLE) {
-			if (vehicleSlotCapacitySoFar == VEHICLE_MOTORCYCLE_CAPACITY) {
-				return PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL;
-			}
+		if (vehicleType == VEHICLE_TYPE_MOTORCYCLE && vehicleSlotCapacitySoFar == VEHICLE_MOTORCYCLE_CAPACITY) {
+			return PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL;
 		}
 
 		// 3. Make a cell reservation for supplied vehicle type.

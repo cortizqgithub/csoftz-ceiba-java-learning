@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   PARKINGSERVICEAPPLICATIONTESTS.JAVA                         */
+/* Source File:   PARKINGSERVICEAPPLICATION.JAVA                              */
 /* Description:   Parking Service (REST API) Application                      */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Sep.22/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -21,12 +21,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Parking Service (REST API) Application
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Sep.22/2017
  */
 
 @SpringBootApplication
 public class ParkingServiceApplication {
+
+	/**
+	 * SonarLint compliant.
+	 */
+	private ParkingServiceApplication() {
+
+	}
 
 	/**
 	 * Entry point for Spring Boot App.
