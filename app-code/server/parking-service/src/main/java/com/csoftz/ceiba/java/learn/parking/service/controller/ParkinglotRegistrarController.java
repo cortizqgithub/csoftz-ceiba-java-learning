@@ -3,7 +3,7 @@
 /* Description:   Controller to register a Vehicle to Parking lot             */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.10/2017                                                 */
-/* Last Modified: Oct.11/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -12,6 +12,10 @@
  Oct.10/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
 package com.csoftz.ceiba.java.learn.parking.service.controller;
+
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_VEHICLE_CANNOT_ENTER;
+import static com.csoftz.ceiba.java.learn.parking.commons.consts.ParkinglotRegisterOpCodeConstants.PARKING_LOT_REGISTRAR_VEHICLE_INVALID_TYPE;
+import static com.csoftz.ceiba.java.learn.parking.commons.helper.UtilHelper.mapOpCodeToDescription;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +34,7 @@ import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistr
  * Controller to register a Vehicle to Parking lot.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.11/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.10/2017
  */
 @RestController
@@ -63,16 +67,19 @@ public class ParkinglotRegistrarController {
 		ParkinglotResult parkinglotResult = new ParkinglotResult(0, "", vehicle);
 
 		if (!parkinglotRegistrarService.isValid(vehicle)) {
-			parkinglotResult.setResultCode(999);
+			parkinglotResult.setResultCode(PARKING_LOT_REGISTRAR_VEHICLE_INVALID_TYPE);
+			parkinglotResult.setMsg(mapOpCodeToDescription(parkinglotResult.getResultCode()));
 			return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
 		}
 		if (!parkinglotRegistrarService.isValidPlate(vehicle, LocalDateTime.now())) {
-			parkinglotResult.setResultCode(998);
+			parkinglotResult.setResultCode(PARKING_LOT_REGISTRAR_VEHICLE_CANNOT_ENTER);
+			parkinglotResult.setMsg(mapOpCodeToDescription(parkinglotResult.getResultCode()));
 			return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
 		}
 
 		int value = parkinglotRegistrarService.register(vehicle);
 		parkinglotResult.setResultCode(value);
+		parkinglotResult.setMsg(mapOpCodeToDescription(parkinglotResult.getResultCode()));
 		return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
 	}
 }
