@@ -14,6 +14,17 @@
 package com.csoftz.ceiba.java.learn.parking.service.repository;
 
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_CAR;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotCellInfoEntity;
+import com.csoftz.ceiba.java.learn.parking.service.repository.interfaces.IParkinglotCellInfoRepository;
+import com.csoftz.ceiba.java.learn.parking.service.test.entities.data.builder.ParkinglotCellInfoEntityDataBuilder;
 
 /**
  * Test for Parking lot Cell Info Repository.
@@ -25,6 +36,8 @@ import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants
 // @RunWith(SpringRunner.class)
 // @DataJpaTest(showSql = true)
 // @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ParkinglotCellInfoRepositoryTests {
 	private static final Long ID = 1L;
 	private static final String PLATE = "KDF123";
@@ -35,8 +48,8 @@ public class ParkinglotCellInfoRepositoryTests {
 	// @Autowired
 	// private TestEntityManager entityManager;
 
-	// @Autowired
-	// private IParkinglotCellInfoRepository parkinglotCellInfoRepository;
+	@Autowired
+	private IParkinglotCellInfoRepository parkinglotCellInfoRepository;
 
 	// @Test
 	// public void saveACellInfo() {
@@ -50,4 +63,11 @@ public class ParkinglotCellInfoRepositoryTests {
 	// assertThat(parkinglotCellInfoEntity).isNotNull();
 	// }
 
+	@Test
+	public void testSave() {
+		ParkinglotCellInfoEntity parkinglotCellInfoEntity = new ParkinglotCellInfoEntityDataBuilder().withPlate(PLATE)
+				.withVehicleType(VEHICLE_TYPE).build();
+		parkinglotCellInfoRepository.save(parkinglotCellInfoEntity);
+		assertThat(parkinglotCellInfoEntity).isNotNull();
+	}
 }

@@ -17,8 +17,6 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,29 +52,12 @@ public class ParkinglotRegistrarController {
 	}
 
 	/**
-	 * @param plate
-	 * @param vehicleType
-	 * @return
+	 * Creates a new vehicle registration.
+	 * 
+	 * @param vehicle
+	 *            Captures data to register.
+	 * @return The operation response.
 	 */
-	@GetMapping("/{plate}/{vehicleType}")
-	public ResponseEntity<ParkinglotResult> registerVehicle(@PathVariable String plate, @PathVariable int vehicleType) {
-		Vehicle vehicle = new Vehicle(0L, plate, vehicleType, 120);
-		ParkinglotResult parkinglotResult = new ParkinglotResult(0, "", vehicle);
-
-		if (!parkinglotRegistrarService.isValid(vehicle)) {
-			parkinglotResult.setResultCode(999);
-			return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
-		}
-		if (!parkinglotRegistrarService.isValidPlate(vehicle, LocalDateTime.now())) {
-			parkinglotResult.setResultCode(998);
-			return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
-		}
-
-		int value = parkinglotRegistrarService.register(vehicle);
-		parkinglotResult.setResultCode(value);
-		return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
-	}
-
 	@PostMapping
 	public ResponseEntity<ParkinglotResult> registerPost(@RequestBody Vehicle vehicle) {
 		ParkinglotResult parkinglotResult = new ParkinglotResult(0, "", vehicle);
