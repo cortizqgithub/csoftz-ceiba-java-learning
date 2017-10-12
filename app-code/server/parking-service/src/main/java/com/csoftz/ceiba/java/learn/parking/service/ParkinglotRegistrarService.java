@@ -68,6 +68,55 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 	}
 
 	/**
+	 * Given vehicle, checks capacity for car or motorcycle returning a full
+	 * condition is met for that vehicle type.
+	 * 
+	 * @param vehicle
+	 *            Information to work.
+	 * @return An OP Code for operation. If there is capacity returns
+	 *         PARKING_LOT_REGISTRAR_OK.
+	 * @see PARKING_LOT_REGISTRAR_OK
+	 * @see PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL
+	 * @see PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL
+	 */
+	private int verifyVehicleCapacity(Vehicle vehicle) {
+		int vehicleType = vehicle.getType();
+		int vehicleSlotCapacitySoFar = parkingCellInfoService.takeCapacityFor(vehicleType);
+		if (vehicleType == VEHICLE_TYPE_CAR && vehicleSlotCapacitySoFar == VEHICLE_CAR_CAPACITY) {
+			return PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL;
+		}
+		if (vehicleType == VEHICLE_TYPE_MOTORCYCLE && vehicleSlotCapacitySoFar == VEHICLE_MOTORCYCLE_CAPACITY) {
+			return PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL;
+		}
+		return PARKING_LOT_REGISTRAR_OK;
+	}
+
+	/**
+	 * Reserves a cell for vehicle.
+	 * 
+	 * @param vehicle
+	 *            Information to work.
+	 * @return An OP Code for operation. If assignment is successful then returns
+	 *         PARKING_LOT_REGISTRAR_OK
+	 * @see PARKING_LOT_REGISTRAR_OK
+	 * @see PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED
+	 * @see PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE
+	 */
+	private int assignVehicleToCell(Vehicle vehicle) {
+		int opCodeResult = PARKING_LOT_REGISTRAR_OK;
+		ParkinglotCellInfo parkinglotCellInfo = parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType());
+		if (parkinglotCellInfo == null) {
+			opCodeResult = PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED;
+		} else {
+			ParkinglotLog parkinglotLog = parkinglotLogService.save(vehicle);
+			if (parkinglotLog == null) {
+				opCodeResult = PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE;
+			}
+		}
+		return opCodeResult;
+	}
+
+	/**
 	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistrarService#isValid(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
 	 */
 	@Override
@@ -116,26 +165,12 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 		}
 
 		// 2. Parking lot has capacity for vehicle type.
-		int vehicleType = vehicle.getType();
-		int vehicleSlotCapacitySoFar = parkingCellInfoService.takeCapacityFor(vehicleType);
-		if (vehicleType == VEHICLE_TYPE_CAR && vehicleSlotCapacitySoFar == VEHICLE_CAR_CAPACITY) {
-			return PARKING_LOT_REGISTRAR_VEHICLE_CAR_CAPACITY_FULL;
-		}
-		if (vehicleType == VEHICLE_TYPE_MOTORCYCLE && vehicleSlotCapacitySoFar == VEHICLE_MOTORCYCLE_CAPACITY) {
-			return PARKING_LOT_REGISTRAR_VEHICLE_MOTORCYCLE_CAPACITY_FULL;
+		int opCodeStatusCapacity = verifyVehicleCapacity(vehicle);
+		if (opCodeStatusCapacity != PARKING_LOT_REGISTRAR_OK) {
+			return opCodeStatusCapacity;
 		}
 
 		// 3. Make a cell reservation for supplied vehicle type.
-		parkinglotCellInfo = parkingCellInfoService.assign(vehicle.getPlate(), vehicle.getType());
-		if (parkinglotCellInfo == null) {
-			return PARKING_LOT_REGISTRAR_VEHICLE_CELL_NOT_ASSIGNED;
-		} else {
-			ParkinglotLog parkinglotLog = parkinglotLogService.save(vehicle);
-			if (parkinglotLog == null) {
-				return PARKING_LOT_REGISTRAR_VEHICLE_LOG_FAILURE;
-			}
-		}
-
-		return PARKING_LOT_REGISTRAR_OK;
+		return assignVehicleToCell(vehicle);
 	}
 }

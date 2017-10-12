@@ -65,7 +65,6 @@ public class ParkinglotLogService implements IParkinglotLogService {
 		ParkinglotLogEntity parkinglotLogEntity = new ParkinglotLogEntity(0L, vehicle.getPlate(), vehicle.getType(),
 				LocalDateTime.now(), null);
 		parkinglotLogEntity = parkinglotLogRepository.save(parkinglotLogEntity);
-		ParkinglotLog parkinglotLog = parkinglotLogMapper.parkinglotLogEntityToParkinglotLog(parkinglotLogEntity);
-		return parkinglotLog;
+		return parkinglotLogMapper.parkinglotLogEntityToParkinglotLog(parkinglotLogEntity);
 	}
 }
