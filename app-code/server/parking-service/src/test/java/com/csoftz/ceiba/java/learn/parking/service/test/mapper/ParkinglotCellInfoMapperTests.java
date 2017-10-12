@@ -3,7 +3,7 @@
 /* Description:   Test suite for ParkinglotCellInfoMapper.                    */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.05/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -32,7 +32,7 @@ import com.csoftz.ceiba.java.learn.parking.service.test.entities.data.builder.Pa
  * Test suite for ParkinglotCellInfoMapper.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.05/2017
  */
 public class ParkinglotCellInfoMapperTests {
@@ -152,5 +152,77 @@ public class ParkinglotCellInfoMapperTests {
 
 		// Assert
 		assertThat(parkinglotCellInfosList).hasSize(0);
+	}
+
+	/**
+	 * Check ParkinglotCellInfoEntity Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenParkinglotConfigEntityPassesObjectProperties() {
+		// Arrange
+		ParkinglotCellInfoEntity parkinglotCellInfoEntity = new ParkinglotCellInfoEntityDataBuilder().build();
+		ParkinglotCellInfoEntity parkinglotCellInfoEntityCopy = parkinglotCellInfoEntity;
+		parkinglotCellInfoEntity.setPlate(PLATE);
+		parkinglotCellInfoEntity.setVehicleType(VEHICLE_TYPE);
+
+		// Act
+		ParkinglotCellInfo parkinglotCellInfo = parkinglotCellInfoMapper
+				.parkinglotCellInfoEntityToParkinglotCellInfo(parkinglotCellInfoEntity);
+		ParkinglotCellInfoEntity parkinglotCellInfoEntityDup = parkinglotCellInfoMapper
+				.parkinglotCellInfoToParkinglotCellInfoEntity(parkinglotCellInfo);
+		boolean sameAsCopy = parkinglotCellInfoEntity.equals(parkinglotCellInfoEntityCopy);
+		boolean sameDescription = parkinglotCellInfoEntityDup.toString().equals(parkinglotCellInfoEntity.toString());
+		boolean sameHashCode = parkinglotCellInfoEntityDup.hashCode() == parkinglotCellInfoEntity.hashCode();
+		boolean sameObjRef = parkinglotCellInfoEntityDup.equals(parkinglotCellInfoEntity);
+		boolean sameObjRefToNull = parkinglotCellInfoEntityDup.equals(null);
+		boolean sameEntityContents = parkinglotCellInfoEntityDup.equals(parkinglotCellInfoEntity);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(parkinglotCellInfoEntity.getPlate()).isEqualTo(parkinglotCellInfoEntityDup.getPlate());
+		assertThat(parkinglotCellInfoEntity.getVehicleType()).isEqualTo(parkinglotCellInfoEntityDup.getVehicleType());
+	}
+
+	/**
+	 * Check ParkinglotCellInfo Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenParkinglotCellInfoPassesObjectProperties() {
+		// Arrange
+		ParkinglotCellInfo parkinglotCellInfo = new ParkinglotCellInfo();
+		ParkinglotCellInfo parkinglotCellInfoCopy = parkinglotCellInfo;
+		parkinglotCellInfo.setPlate(PLATE);
+		parkinglotCellInfo.setVehicleType(VEHICLE_TYPE);
+
+		// Act
+		ParkinglotCellInfoEntity parkinglotCellInfoEntity = parkinglotCellInfoMapper
+				.parkinglotCellInfoToParkinglotCellInfoEntity(parkinglotCellInfo);
+		ParkinglotCellInfo parkinglotCellInfoDup = parkinglotCellInfoMapper
+				.parkinglotCellInfoEntityToParkinglotCellInfo(parkinglotCellInfoEntity);
+		boolean sameAsCopy = parkinglotCellInfo.equals(parkinglotCellInfoCopy);
+		boolean sameDescription = parkinglotCellInfoDup.toString().equals(parkinglotCellInfo.toString());
+		boolean sameHashCode = parkinglotCellInfoDup.hashCode() == parkinglotCellInfo.hashCode();
+		boolean sameObjRef = parkinglotCellInfoDup.equals(parkinglotCellInfo);
+		boolean sameObjRefToNull = parkinglotCellInfoDup.equals(null);
+		boolean sameEntityContents = parkinglotCellInfoDup.equals(parkinglotCellInfo);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(parkinglotCellInfo.getPlate()).isEqualTo(parkinglotCellInfoDup.getPlate());
+		assertThat(parkinglotCellInfo.getVehicleType()).isEqualTo(parkinglotCellInfoDup.getVehicleType());
 	}
 }

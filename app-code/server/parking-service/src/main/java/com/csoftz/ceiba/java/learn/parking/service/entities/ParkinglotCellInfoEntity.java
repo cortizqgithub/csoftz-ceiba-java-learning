@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Domain definition to manipulate Parking-lot Cell objects (Entity). <br>
@@ -69,11 +70,7 @@ public class ParkinglotCellInfoEntity {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((plate == null) ? 0 : plate.hashCode());
-		result = prime * result + vehicleType;
-		return result;
+		return new HashCodeBuilder(17, 37).append(plate).append(vehicleType).toHashCode();
 	}
 
 	/**

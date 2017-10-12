@@ -22,6 +22,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Domain definition to manipulate Vehicle objects (Entity).
@@ -82,13 +83,7 @@ public class VehicleEntity {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cylinder;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((plate == null) ? 0 : plate.hashCode());
-		result = prime * result + type;
-		return result;
+		return new HashCodeBuilder(17, 37).append(id).append(plate).append(type).append(cylinder).toHashCode();
 	}
 
 	/**

@@ -117,7 +117,7 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 	}
 
 	/**
-	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistrarService#isValid(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
+	 * @see com.csoftz.ceiba.java.learn.parking.service.test.interfaces.IParkinglotRegistrarService#isValid(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
 	 */
 	@Override
 	public boolean isValid(Vehicle vehicle) {
@@ -129,7 +129,7 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 	}
 
 	/**
-	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistrarService#isValidPlate(com.csoftz.ceiba.java.learn.parking.domain.Vehicle,
+	 * @see com.csoftz.ceiba.java.learn.parking.service.test.interfaces.IParkinglotRegistrarService#isValidPlate(com.csoftz.ceiba.java.learn.parking.domain.Vehicle,
 	 *      java.time.LocalDateTime)
 	 */
 	@Override
@@ -149,7 +149,7 @@ public class ParkinglotRegistrarService implements IParkinglotRegistrarService {
 	}
 
 	/**
-	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistrarService#register(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
+	 * @see com.csoftz.ceiba.java.learn.parking.service.test.interfaces.IParkinglotRegistrarService#register(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
 	 */
 	@Override
 	public int register(Vehicle vehicle) {

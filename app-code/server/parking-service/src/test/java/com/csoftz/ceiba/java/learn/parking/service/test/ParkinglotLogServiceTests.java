@@ -3,7 +3,7 @@
 /* Description:   Tests for the Parkinglot Log service.                       */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@
  History
  Oct.06/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
-package com.csoftz.ceiba.java.learn.parking.service;
+package com.csoftz.ceiba.java.learn.parking.service.test;
 
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_TYPE_CAR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +31,7 @@ import org.junit.Test;
 
 import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotLog;
 import com.csoftz.ceiba.java.learn.parking.domain.Vehicle;
+import com.csoftz.ceiba.java.learn.parking.service.ParkinglotLogService;
 import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotLogEntity;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogService;
 import com.csoftz.ceiba.java.learn.parking.service.mapper.ParkinglotLogMapper;
@@ -42,8 +43,8 @@ import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.Vehi
  * Tests for the Parkinglot Log service.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.06/2017
- * @since 1.8 (JDK), Oct.10/2017
+ * @version 1.1, Oct.12/2017
+ * @since 1.8 (JDK), Oct.06/2017
  */
 public class ParkinglotLogServiceTests {
 	/*

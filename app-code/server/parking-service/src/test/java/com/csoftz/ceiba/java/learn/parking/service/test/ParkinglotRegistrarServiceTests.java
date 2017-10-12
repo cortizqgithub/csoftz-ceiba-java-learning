@@ -3,7 +3,7 @@
 /* Description:   Test for the Registrar Service.                             */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@
  History
  Oct.06/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
-package com.csoftz.ceiba.java.learn.parking.service;
+package com.csoftz.ceiba.java.learn.parking.service.test;
 
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_CAR_CAPACITY;
 import static com.csoftz.ceiba.java.learn.parking.commons.consts.GlobalConstants.VEHICLE_MOTORCYCLE_CAPACITY;
@@ -44,6 +44,7 @@ import org.junit.Test;
 import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotCellInfo;
 import com.csoftz.ceiba.java.learn.parking.domain.ParkinglotLog;
 import com.csoftz.ceiba.java.learn.parking.domain.Vehicle;
+import com.csoftz.ceiba.java.learn.parking.service.ParkinglotRegistrarService;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotCellInfoService;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogService;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotRegistrarService;
@@ -55,7 +56,7 @@ import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.Vehi
  * Test for the Registrar Service.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
 public class ParkinglotRegistrarServiceTests {

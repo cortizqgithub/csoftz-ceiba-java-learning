@@ -54,7 +54,7 @@ public class ParkinglotLogService implements IParkinglotLogService {
 	}
 
 	/**
-	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogService#save(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
+	 * @see com.csoftz.ceiba.java.learn.parking.service.test.interfaces.IParkinglotLogService#save(com.csoftz.ceiba.java.learn.parking.domain.Vehicle)
 	 */
 	@Override
 	public ParkinglotLog save(Vehicle vehicle) {

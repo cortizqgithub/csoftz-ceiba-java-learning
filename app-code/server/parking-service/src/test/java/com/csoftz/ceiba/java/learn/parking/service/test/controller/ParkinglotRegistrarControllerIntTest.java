@@ -12,7 +12,7 @@
  History
  Oct.11/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
-package com.csoftz.ceiba.java.learn.parking.service.controller;
+package com.csoftz.ceiba.java.learn.parking.service.test.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

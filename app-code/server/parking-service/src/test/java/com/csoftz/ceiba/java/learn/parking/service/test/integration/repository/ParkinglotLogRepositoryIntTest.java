@@ -12,7 +12,7 @@
  History
  Oct.09/2017 COQ  File created.
  -----------------------------------------------------------------------------*/
-package com.csoftz.ceiba.java.learn.parking.service.repository.integration;
+package com.csoftz.ceiba.java.learn.parking.service.test.integration.repository;
 
 /**
  * Test for Parking lot Log Repository.
@@ -22,5 +22,4 @@ package com.csoftz.ceiba.java.learn.parking.service.repository.integration;
  * @since 1.8 (JDK), Oct.10/2017
  */
 public class ParkinglotLogRepositoryIntTest {
-
 }

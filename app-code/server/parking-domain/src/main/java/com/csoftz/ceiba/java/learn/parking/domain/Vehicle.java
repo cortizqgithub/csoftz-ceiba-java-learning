@@ -3,7 +3,7 @@
 /* Description:   Domain definition to manipulate Vehicle objects.            */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.11/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -15,12 +15,13 @@
 package com.csoftz.ceiba.java.learn.parking.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Domain definition to manipulate Vehicle objects.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.11/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class Vehicle {
@@ -60,18 +61,11 @@ public class Vehicle {
 	}
 
 	/**
-	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cylinder;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((plate == null) ? 0 : plate.hashCode());
-		result = prime * result + type;
-		return result;
+		return new HashCodeBuilder(17, 37).append(id).append(plate).append(type).append(cylinder).toHashCode();
 	}
 
 	/**

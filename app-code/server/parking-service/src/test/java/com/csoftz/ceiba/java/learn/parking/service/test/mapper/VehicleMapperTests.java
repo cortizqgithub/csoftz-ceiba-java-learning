@@ -3,7 +3,7 @@
 /* Description:   Test suite for VehicleMapper.                               */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.05/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -33,7 +33,7 @@ import com.csoftz.ceiba.java.learn.parking.service.test.entities.data.builder.Ve
  * Test suite for VehicleMapper.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.05/2017
  */
 public class VehicleMapperTests {
@@ -150,5 +150,81 @@ public class VehicleMapperTests {
 
 		// Assert
 		assertThat(vehiclesList).hasSize(0);
+	}
+
+	/**
+	 * Check VehicleEntity Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenVehicleEntityPassesObjectProperties() {
+		// Arrange
+		VehicleEntity vehicleEntity = new VehicleEntityDataBuilder().build();
+		VehicleEntity vehicleEntityCopy = vehicleEntity;
+		vehicleEntity.setId(ID);
+		vehicleEntity.setPlate(PLATE);
+		vehicleEntity.setType(VEHICLE_TYPE);
+		vehicleEntity.setCylinder(CYLINDER);
+
+		// Act
+		Vehicle vehicle = vehicleMapper.vehicleEntityToVehicle(vehicleEntity);
+		VehicleEntity vehicleEntityDup = vehicleMapper.vehicleToVehicleEntity(vehicle);
+		boolean sameAsCopy = vehicleEntity.equals(vehicleEntityCopy);
+		boolean sameDescription = vehicleEntityDup.toString().equals(vehicleEntity.toString());
+		boolean sameHashCode = vehicleEntityDup.hashCode() == vehicleEntity.hashCode();
+		boolean sameObjRef = vehicleEntityDup.equals(vehicleEntity);
+		boolean sameObjRefToNull = vehicleEntityDup.equals(null);
+		boolean sameEntityContents = vehicleEntityDup.equals(vehicleEntity);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(vehicleEntity.getId()).isEqualTo(vehicleEntityDup.getId());
+		assertThat(vehicleEntity.getPlate()).isEqualTo(vehicleEntityDup.getPlate());
+		assertThat(vehicleEntity.getType()).isEqualTo(vehicleEntityDup.getType());
+		assertThat(vehicleEntity.getCylinder()).isEqualTo(vehicleEntityDup.getCylinder());
+	}
+
+	/**
+	 * Check Vehicle Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenVehiclePassesObjectProperties() {
+		// Arrange
+		Vehicle vehicle = new Vehicle();
+		Vehicle vehicleCopy = vehicle;
+		vehicle.setId(ID);
+		vehicle.setPlate(PLATE);
+		vehicle.setType(VEHICLE_TYPE);
+		vehicle.setCylinder(CYLINDER);
+
+		// Act
+		VehicleEntity vehicleEntity = vehicleMapper.vehicleToVehicleEntity(vehicle);
+		Vehicle vehicleDup = vehicleMapper.vehicleEntityToVehicle(vehicleEntity);
+		boolean sameAsCopy = vehicle.equals(vehicleCopy);
+		boolean sameDescription = vehicleDup.toString().equals(vehicle.toString());
+		boolean sameHashCode = vehicleDup.hashCode() == vehicle.hashCode();
+		boolean sameObjRef = vehicleDup.equals(vehicle);
+		boolean sameObjRefToNull = vehicleDup.equals(null);
+		boolean sameEntityContents = vehicleDup.equals(vehicle);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(vehicle.getId()).isEqualTo(vehicleDup.getId());
+		assertThat(vehicle.getPlate()).isEqualTo(vehicleDup.getPlate());
+		assertThat(vehicle.getType()).isEqualTo(vehicleDup.getType());
+		assertThat(vehicle.getCylinder()).isEqualTo(vehicleDup.getCylinder());
 	}
 }

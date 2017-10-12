@@ -51,7 +51,7 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	}
 
 	/**
-	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotCellInfoService#find(java.lang.String,
+	 * @see com.csoftz.ceiba.java.learn.parking.service.test.interfaces.IParkinglotCellInfoService#find(java.lang.String,
 	 *      int)
 	 */
 	@Override
@@ -62,7 +62,7 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	}
 
 	/**
-	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotCellInfoService#takeCapacityFor(int)
+	 * @see com.csoftz.ceiba.java.learn.parking.service.test.interfaces.IParkinglotCellInfoService#takeCapacityFor(int)
 	 */
 	@Override
 	public int takeCapacityFor(int vehicleType) {
@@ -70,7 +70,7 @@ public class ParkinglotCellInfoService implements IParkinglotCellInfoService {
 	}
 
 	/**
-	 * @see com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotCellInfoService#assign(java.lang.String,
+	 * @see com.csoftz.ceiba.java.learn.parking.service.test.interfaces.IParkinglotCellInfoService#assign(java.lang.String,
 	 *      int)
 	 */
 	@Override

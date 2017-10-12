@@ -3,7 +3,7 @@
 /* Description:   Test suite for ParkinglotLogMapper.                         */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.05/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -36,7 +36,7 @@ import com.csoftz.ceiba.java.learn.parking.service.test.entities.data.builder.Pa
  * Test suite for ParkinglotLogMapper.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.05/2017
  */
 public class ParkinglotLogMapperTests {
@@ -120,13 +120,13 @@ public class ParkinglotLogMapperTests {
 	@Test
 	public void givenParkinglotLogEntityIsNullMapsToParkinglotLogAsNull() {
 		// Arrange
-		ParkinglotLog parkinglotLog = null;
+		ParkinglotLogEntity parkinglotLogEntity = null;
 
 		// Act
-		ParkinglotLogEntity parkinglotLogEntity = parkinglotLogMapper.parkinglotLogToParkinglotLogEntity(parkinglotLog);
+		ParkinglotLog parkinglotLog = parkinglotLogMapper.parkinglotLogEntityToParkinglotLog(parkinglotLogEntity);
 
 		// Assert
-		assertThat(parkinglotLogEntity).isNull();
+		assertThat(parkinglotLog).isNull();
 	}
 
 	/**
@@ -161,5 +161,86 @@ public class ParkinglotLogMapperTests {
 
 		// Assert
 		assertThat(parkinglotLogsList).hasSize(0);
+	}
+
+	/**
+	 * Check ParkinglotLogEntity Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenParkinglotLogEntityPassesObjectProperties() {
+		// Arrange
+		ParkinglotLogEntity parkinglotLogEntity = new ParkinglotLogEntityDataBuilder().build();
+		ParkinglotLogEntity parkinglotLogEntityCopy = parkinglotLogEntity;
+		parkinglotLogEntity.setId(ID);
+		parkinglotLogEntity.setPlate(PLATE);
+		parkinglotLogEntity.setVehicleType(VEHICLE_TYPE);
+		parkinglotLogEntity.setAdmissionDate(LocalDateTime.MIN);
+		parkinglotLogEntity.setDepartureDate(LocalDateTime.MIN);
+
+		// Act
+		ParkinglotLog parkinglotLog = parkinglotLogMapper.parkinglotLogEntityToParkinglotLog(parkinglotLogEntity);
+		ParkinglotLogEntity parkinglotLogEntityDup = parkinglotLogMapper
+				.parkinglotLogToParkinglotLogEntity(parkinglotLog);
+		boolean sameAsCopy = parkinglotLogEntity.equals(parkinglotLogEntityCopy);
+		boolean sameDescription = parkinglotLogEntityDup.toString().equals(parkinglotLogEntity.toString());
+		boolean sameHashCode = parkinglotLogEntityDup.hashCode() == parkinglotLogEntity.hashCode();
+		boolean sameObjRef = parkinglotLogEntityDup.equals(parkinglotLogEntity);
+		boolean sameObjRefToNull = parkinglotLogEntityDup.equals(null);
+		boolean sameEntityContents = parkinglotLogEntityDup.equals(parkinglotLogEntity);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(parkinglotLogEntity.getId()).isEqualTo(parkinglotLogEntityDup.getId());
+		assertThat(parkinglotLogEntity.getPlate()).isEqualTo(parkinglotLogEntityDup.getPlate());
+		assertThat(parkinglotLogEntity.getVehicleType()).isEqualTo(parkinglotLogEntityDup.getVehicleType());
+		assertThat(parkinglotLogEntity.getAdmissionDate()).isEqualTo(parkinglotLogEntityDup.getAdmissionDate());
+		assertThat(parkinglotLogEntity.getDepartureDate()).isEqualTo(parkinglotLogEntityDup.getDepartureDate());
+	}
+
+	/**
+	 * Check ParkinglotLog Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenParkinglotLogPassesObjectProperties() {
+		// Arrange
+		ParkinglotLog parkinglotLog = new ParkinglotLog();
+		ParkinglotLog parkinglotLogCopy = parkinglotLog;
+		parkinglotLog.setId(ID);
+		parkinglotLog.setPlate(PLATE);
+		parkinglotLog.setVehicleType(VEHICLE_TYPE);
+		parkinglotLog.setAdmissionDate(LocalDateTime.MIN);
+		parkinglotLog.setDepartureDate(LocalDateTime.MIN);
+
+		// Act
+		ParkinglotLogEntity parkinglotLogEntity = parkinglotLogMapper.parkinglotLogToParkinglotLogEntity(parkinglotLog);
+		ParkinglotLog parkinglotLogDup = parkinglotLogMapper.parkinglotLogEntityToParkinglotLog(parkinglotLogEntity);
+		boolean sameAsCopy = parkinglotLog.equals(parkinglotLogCopy);
+		boolean sameDescription = parkinglotLogDup.toString().equals(parkinglotLog.toString());
+		boolean sameHashCode = parkinglotLogDup.hashCode() == parkinglotLog.hashCode();
+		boolean sameObjRef = parkinglotLogDup.equals(parkinglotLog);
+		boolean sameObjRefToNull = parkinglotLogDup.equals(null);
+		boolean sameEntityContents = parkinglotLogDup.equals(parkinglotLog);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(parkinglotLog.getId()).isEqualTo(parkinglotLogDup.getId());
+		assertThat(parkinglotLog.getPlate()).isEqualTo(parkinglotLogDup.getPlate());
+		assertThat(parkinglotLog.getVehicleType()).isEqualTo(parkinglotLogDup.getVehicleType());
+		assertThat(parkinglotLog.getAdmissionDate()).isEqualTo(parkinglotLogDup.getAdmissionDate());
+		assertThat(parkinglotLog.getDepartureDate()).isEqualTo(parkinglotLogDup.getDepartureDate());
 	}
 }

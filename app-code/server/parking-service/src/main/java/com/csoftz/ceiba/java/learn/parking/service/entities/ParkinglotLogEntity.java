@@ -25,6 +25,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Domain definition to manipulate Parking-lot Log objects (Entity). <br>
@@ -96,14 +97,8 @@ public class ParkinglotLogEntity {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((admissionDate == null) ? 0 : admissionDate.hashCode());
-		result = prime * result + ((departureDate == null) ? 0 : departureDate.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((plate == null) ? 0 : plate.hashCode());
-		result = prime * result + vehicleType;
-		return result;
+		return new HashCodeBuilder(17, 37).append(id).append(plate).append(vehicleType).append(admissionDate)
+				.append(departureDate).toHashCode();
 	}
 
 	/**
@@ -117,6 +112,7 @@ public class ParkinglotLogEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+
 		ParkinglotLogEntity other = (ParkinglotLogEntity) obj;
 		return new EqualsBuilder().appendSuper(super.equals(obj)).append(id, other.id).append(plate, other.plate)
 				.append(vehicleType, other.vehicleType).append(admissionDate, other.admissionDate)
@@ -198,9 +194,7 @@ public class ParkinglotLogEntity {
 		this.departureDate = departureDate;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

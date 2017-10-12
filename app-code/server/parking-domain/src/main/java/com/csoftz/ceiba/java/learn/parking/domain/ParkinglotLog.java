@@ -3,7 +3,7 @@
 /* Description:   Domain definition to manipulate Parking-lot Log objects.    */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.03/2017                                                 */
-/* Last Modified: Oct.11/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -17,6 +17,7 @@ package com.csoftz.ceiba.java.learn.parking.domain;
 import java.time.LocalDateTime;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Domain definition to manipulate Parking-lot Log objects. <br>
@@ -25,7 +26,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * Parking-lot.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.11/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.03/2017
  */
 public class ParkinglotLog {
@@ -75,14 +76,8 @@ public class ParkinglotLog {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((admissionDate == null) ? 0 : admissionDate.hashCode());
-		result = prime * result + ((departureDate == null) ? 0 : departureDate.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((plate == null) ? 0 : plate.hashCode());
-		result = prime * result + vehicleType;
-		return result;
+		return new HashCodeBuilder(17, 37).append(id).append(plate).append(vehicleType).append(admissionDate)
+				.append(departureDate).toHashCode();
 	}
 
 	/**

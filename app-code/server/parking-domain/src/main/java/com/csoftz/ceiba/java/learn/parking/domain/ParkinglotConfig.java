@@ -15,6 +15,7 @@
 package com.csoftz.ceiba.java.learn.parking.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Domain definition to manipulate configuration objects. <br>
@@ -67,13 +68,7 @@ public class ParkinglotConfig {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
-		return result;
+		return new HashCodeBuilder(17, 37).append(id).append(name).append(value).append(description).toHashCode();
 	}
 
 	/**

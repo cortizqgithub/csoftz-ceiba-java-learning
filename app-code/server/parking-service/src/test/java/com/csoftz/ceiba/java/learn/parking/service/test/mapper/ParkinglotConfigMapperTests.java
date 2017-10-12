@@ -3,7 +3,7 @@
 /* Description:   Test suite for ParkinglotConfig.                            */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.05/2017                                                 */
-/* Last Modified: Oct.10/2017                                                 */
+/* Last Modified: Oct.12/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -32,7 +32,7 @@ import com.csoftz.ceiba.java.learn.parking.service.test.entities.data.builder.Pa
  * Test suite for ParkinglotConfig.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.10/2017
+ * @version 1.1, Oct.12/2017
  * @since 1.8 (JDK), Oct.05/2017
  */
 public class ParkinglotConfigMapperTests {
@@ -160,4 +160,83 @@ public class ParkinglotConfigMapperTests {
 		assertThat(parkinglotConfigList).hasSize(0);
 	}
 
+	/**
+	 * Check ParkinglotConfigEntity Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenParkinglotConfigEntityPassesObjectProperties() {
+		// Arrange
+		ParkinglotConfigEntity parkinglotConfigEntity = new ParkinglotConfigEntityDataBuilder().build();
+		ParkinglotConfigEntity parkinglotConfigEntityCopy = parkinglotConfigEntity;
+		parkinglotConfigEntity.setId(ID);
+		parkinglotConfigEntity.setName(NAME);
+		parkinglotConfigEntity.setValue(VALUE);
+		parkinglotConfigEntity.setDescription(DESCRIPTION);
+
+		// Act
+		ParkinglotConfig parkinglotConfig = parkinglotConfigMapper
+				.parkinglotConfigEntityToParkinglotConfig(parkinglotConfigEntity);
+		ParkinglotConfigEntity parkinglotConfigEntityDup = parkinglotConfigMapper
+				.parkinglotConfigToParkinglotConfigEntity(parkinglotConfig);
+		boolean sameAsCopy = parkinglotConfigEntity.equals(parkinglotConfigEntityCopy);
+		boolean sameDescription = parkinglotConfigEntityDup.toString().equals(parkinglotConfigEntity.toString());
+		boolean sameHashCode = parkinglotConfigEntityDup.hashCode() == parkinglotConfigEntity.hashCode();
+		boolean sameObjRef = parkinglotConfigEntityDup.equals(parkinglotConfigEntity);
+		boolean sameObjRefToNull = parkinglotConfigEntityDup.equals(null);
+		boolean sameEntityContents = parkinglotConfigEntityDup.equals(parkinglotConfigEntity);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(parkinglotConfigEntity.getId()).isEqualTo(parkinglotConfigEntityDup.getId());
+		assertThat(parkinglotConfigEntity.getName()).isEqualTo(parkinglotConfigEntityDup.getName());
+		assertThat(parkinglotConfigEntity.getValue()).isEqualTo(parkinglotConfigEntityDup.getValue());
+		assertThat(parkinglotConfigEntity.getDescription()).isEqualTo(parkinglotConfigEntityDup.getDescription());
+	}
+
+	/**
+	 * Check ParkinglotConfig Getters/Setters, hashCode and equals methods.
+	 */
+	@Test
+	public void givenParkinglotConfigPassesObjectProperties() {
+		// Arrange
+		ParkinglotConfig parkinglotConfig = new ParkinglotConfig();
+		ParkinglotConfig parkinglotConfigCopy = parkinglotConfig;
+		parkinglotConfig.setId(ID);
+		parkinglotConfig.setName(NAME);
+		parkinglotConfig.setValue(VALUE);
+		parkinglotConfig.setDescription(DESCRIPTION);
+
+		// Act
+		ParkinglotConfigEntity parkinglotConfigEntity = parkinglotConfigMapper
+				.parkinglotConfigToParkinglotConfigEntity(parkinglotConfig);
+		ParkinglotConfig parkinglotConfigDup = parkinglotConfigMapper
+				.parkinglotConfigEntityToParkinglotConfig(parkinglotConfigEntity);
+		boolean sameAsCopy = parkinglotConfig.equals(parkinglotConfigCopy);
+		boolean sameDescription = parkinglotConfigDup.toString().equals(parkinglotConfig.toString());
+		boolean sameHashCode = parkinglotConfigDup.hashCode() == parkinglotConfig.hashCode();
+		boolean sameObjRef = parkinglotConfigDup.equals(parkinglotConfig);
+		boolean sameObjRefToNull = parkinglotConfigDup.equals(null);
+		boolean sameEntityContents = parkinglotConfigDup.equals(parkinglotConfig);
+
+		// Assert
+		assertThat(sameAsCopy).isTrue();
+		assertThat(sameDescription).isTrue();
+		assertThat(sameHashCode).isTrue();
+		assertThat(sameObjRef).isFalse(); // Mapper creates another instance
+		assertThat(sameObjRefToNull).isFalse();
+		assertThat(sameEntityContents).isFalse();
+
+		/// Now with contents.
+		assertThat(parkinglotConfig.getId()).isEqualTo(parkinglotConfigDup.getId());
+		assertThat(parkinglotConfig.getName()).isEqualTo(parkinglotConfigDup.getName());
+		assertThat(parkinglotConfig.getValue()).isEqualTo(parkinglotConfigDup.getValue());
+		assertThat(parkinglotConfig.getDescription()).isEqualTo(parkinglotConfigDup.getDescription());
+	}
 }
