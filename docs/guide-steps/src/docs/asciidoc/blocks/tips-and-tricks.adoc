@@ -39,7 +39,11 @@ http://mapstruct.org/documentation/reference-guide/
 Mapstruct Examples
 https://github.com/mapstruct/mapstruct-examples
 
-== Unit Testing 
+== Software Testing
+TESTING SOFTWARE
+https://springframework.guru/testing-software/
+
+=== Unit Testing 
 The Benefits of Using assertThat over other Assert Methods in Unit Tests
 https://objectpartners.com/2013/09/18/the-benefits-of-using-assertthat-over-other-assert-methods-in-unit-tests/
 
@@ -52,3 +56,11 @@ https://springframework.guru/mocking-unit-tests-mockito/
 
 MOCKITO MOCK VS SPY IN SPRING BOOT TESTS
 https://springframework.guru/mockito-mock-vs-spy-in-spring-boot-tests/
+
+=== Integration Testing
+Integration Testing in Spring
+http://www.baeldung.com/integration-testing-in-spring
+
+== Http
+HTTP Status Codes
+https://httpstatuses.com/
