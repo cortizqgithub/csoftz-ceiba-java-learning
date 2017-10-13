@@ -46,3 +46,9 @@ https://objectpartners.com/2013/09/18/the-benefits-of-using-assertthat-over-othe
 AssertJ
 Fluent assertions for java
 http://joel-costigliola.github.io/assertj/
+
+MOCKING IN UNIT TESTS WITH MOCKITO
+https://springframework.guru/mocking-unit-tests-mockito/
+
+MOCKITO MOCK VS SPY IN SPRING BOOT TESTS
+https://springframework.guru/mockito-mock-vs-spy-in-spring-boot-tests/
