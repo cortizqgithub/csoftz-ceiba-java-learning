@@ -3,7 +3,7 @@
 /* Description:   Tests for the Parkinglot Log service.                       */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Oct.06/2017                                                 */
-/* Last Modified: Oct.12/2017                                                 */
+/* Last Modified: Oct.13/2017                                                 */
 /* Version:       1.1                                                         */
 /* Copyright (c), 2017 CSoftZ, Ceiba.                                         */
 /*----------------------------------------------------------------------------*/
@@ -36,14 +36,13 @@ import com.csoftz.ceiba.java.learn.parking.service.entities.ParkinglotLogEntity;
 import com.csoftz.ceiba.java.learn.parking.service.interfaces.IParkinglotLogService;
 import com.csoftz.ceiba.java.learn.parking.service.mapper.ParkinglotLogMapper;
 import com.csoftz.ceiba.java.learn.parking.service.repository.interfaces.IParkinglotLogRepository;
-import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.ParkinglotLogDataBuilder;
 import com.csoftz.ceiba.java.learn.parking.service.test.domain.data.builder.VehicleDataBuilder;
 
 /**
  * Tests for the Parkinglot Log service.
  *
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Oct.12/2017
+ * @version 1.1, Oct.13/2017
  * @since 1.8 (JDK), Oct.06/2017
  */
 public class ParkinglotLogServiceTests {
@@ -59,7 +58,6 @@ public class ParkinglotLogServiceTests {
 	 * Test working data.
 	 */
 	private Vehicle vehicle;
-	private ParkinglotLog parkinglotLog;
 	private ParkinglotLogEntity parkinglotLogEntity;
 	private static IParkinglotLogRepository parkinglotLogRepository;
 	private static IParkinglotLogService parkinglotLogService;
@@ -83,7 +81,6 @@ public class ParkinglotLogServiceTests {
 		reset(parkinglotLogRepository);
 		vehicle = new VehicleDataBuilder().withId(ID).withPlate(PLATE).withType(VEHICLE_TYPE).withCylinder(CYLINDER)
 				.build();
-		parkinglotLog = new ParkinglotLogDataBuilder().withPlate(PLATE).withVehicleType(VEHICLE_TYPE).build();
 		parkinglotLogEntity = new ParkinglotLogEntity(0L, vehicle.getPlate(), vehicle.getType(), LocalDateTime.now(),
 				null);
 	}

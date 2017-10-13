@@ -69,12 +69,12 @@ public class ParkinglotRegistrarController {
 		if (!parkinglotRegistrarService.isValid(vehicle)) {
 			parkinglotResult.setResultCode(PARKING_LOT_REGISTRAR_VEHICLE_INVALID_TYPE);
 			parkinglotResult.setMsg(mapOpCodeToDescription(parkinglotResult.getResultCode()));
-			return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
+			return new ResponseEntity<>(parkinglotResult, HttpStatus.NOT_ACCEPTABLE);
 		}
 		if (!parkinglotRegistrarService.isValidPlate(vehicle, LocalDateTime.now())) {
 			parkinglotResult.setResultCode(PARKING_LOT_REGISTRAR_VEHICLE_CANNOT_ENTER);
 			parkinglotResult.setMsg(mapOpCodeToDescription(parkinglotResult.getResultCode()));
-			return new ResponseEntity<>(parkinglotResult, HttpStatus.OK);
+			return new ResponseEntity<>(parkinglotResult, HttpStatus.NOT_ACCEPTABLE);
 		}
 
 		int value = parkinglotRegistrarService.register(vehicle);
